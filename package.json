@@ -10,7 +10,9 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@vueuse/core": "^9.13.0",
     "nanoid": "^4.0.1",
+    "pinia": "^2.0.31",
     "vue": "^3.2.45"
   },
   "devDependencies": {
