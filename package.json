@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "nanoid": "^4.0.1",
     "vue": "^3.2.45"
   },
   "devDependencies": {
