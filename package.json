@@ -10,12 +10,14 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@vueuse/core": "^9.13.0",
     "nanoid": "^4.0.1",
     "pinia": "^2.0.31",
+    "pinia-persistedstate": "^0.1.2",
+    "secure-ls": "^1.2.6",
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/tsconfig": "^0.1.3",

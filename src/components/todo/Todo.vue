@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-
 import { nanoid } from "nanoid";
+import { useApp } from "@/store/app";
 
 import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";
@@ -11,38 +11,17 @@ import IconAdd from "../icons/IconAdd.vue";
 import IconFilter from "../icons/IconFilter.vue";
 import IconGrid from "../icons/IconGrid.vue";
 
-export interface Todo {
-  id: string;
-  name: string;
-  isCompleted: boolean;
-}
-
 const newTodo = ref("");
+const appStore = useApp();
 
-const todos = ref<Todo[]>([]);
-
-const addTodo = () => {
-  todos.value.push({
+const add = () => {
+  appStore.addTodo({
     id: nanoid(),
     name: newTodo.value,
     isCompleted: false,
   });
 
   newTodo.value = "";
-};
-
-const toggleIsCompleted = (id: string) => {
-  const completedStatus = todos.value.find(
-    (todo) => todo.id === id
-  )?.isCompleted;
-
-  todos.value[todos.value.findIndex((todo) => todo.id === id)].isCompleted =
-    !completedStatus;
-};
-
-const deleteTodo = (id: string) => {
-  console.log("asdasd");
-  todos.value = todos.value.filter((todo) => todo.id !== id);
 };
 </script>
 
@@ -62,7 +41,7 @@ const deleteTodo = (id: string) => {
         button-label="Add Todo"
         button-size="sm"
         class="ml-auto"
-        @click="addTodo"
+        @click="add"
       >
         <icon-add class="w-5" />
       </todo-button>
@@ -76,12 +55,12 @@ const deleteTodo = (id: string) => {
 
     <div class="divide-y divide-neutral-800 flex flex-col">
       <todo-item
-        v-for="todo in todos"
+        v-for="todo in appStore.todos"
         :todo-id="todo.id"
         :todo-name="todo.name"
         :is-completed="todo.isCompleted"
-        @toggle-completed="toggleIsCompleted(todo.id)"
-        @delete-task="deleteTodo(todo.id)"
+        @toggle-completed="appStore.toggleIsCompleted(todo.id)"
+        @delete-task="appStore.deleteTodo(todo.id)"
         class="py-3"
       />
     </div>
