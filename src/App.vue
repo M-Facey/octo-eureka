@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import TheHeader from "./components/TheHeader.vue";
+
+import Todo from "./components/todo/Todo.vue";
 </script>
 
 <template>
-  <main class="h-screen bg-neutral-800 flex flex-col items-center justify-center">
-    <h2 class="text-6xl text-neutral-500 font-gloock">Octa Eureka</h2>
-    <p class="text-xl text-white pt-2 font-os">currently work in progress</p>
+  <main class="h-screen bg-neutral-400">
+    <the-header />
+    <todo />
   </main>
 </template>
