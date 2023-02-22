@@ -9,7 +9,7 @@ This is a simple todo application created in Vue3 and TailwindCSS.
 | Add Todo                |        | :white_check_mark: |                    |
 | Delete Todo             |        | :white_check_mark: |                    |
 | Complete Todo           |        | :white_check_mark: |                    |
-| Filter Todo             |        |                    | :white_check_mark: |
+| Filter Todo             |        | :white_check_mark: |                    |
 | Sort Todo               |        |                    | :white_check_mark: |
 | Add Unit Test           |        |                    | :white_check_mark: |
 | Add E2E Test            |        |                    | :white_check_mark: |

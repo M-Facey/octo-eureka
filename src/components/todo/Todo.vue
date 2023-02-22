@@ -1,18 +1,19 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { nanoid } from "nanoid";
-import { useApp } from "@/store/app";
+import { useAppStore } from "@/store/app";
 
 import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";
 import TodoItem from "./TodoItem.vue";
+import FilterModal from "./FilterModal.vue";
 
 import IconAdd from "../icons/IconAdd.vue";
 import IconFilter from "../icons/IconFilter.vue";
 import IconGrid from "../icons/IconGrid.vue";
 
 const newTodo = ref("");
-const appStore = useApp();
+const appStore = useAppStore();
 
 const add = () => {
   appStore.addTodo({
@@ -45,17 +46,24 @@ const add = () => {
       >
         <icon-add class="w-5" />
       </todo-button>
-      <todo-button button-size="md" :is-icon-button="true">
-        <icon-filter class="w-5" />
+      <todo-button button-size="sm" @click="appStore.toogleShowFilterModal()">
+        <div class="relative">
+          <icon-filter class="w-5" />
+          <filter-modal
+            v-if="appStore.showFilterModal"
+            class="absolute z-10"
+            @click.stop
+          />
+        </div>
       </todo-button>
-      <todo-button button-size="md" :is-icon-button="true">
+      <todo-button button-size="sm">
         <icon-grid class="w-5" />
       </todo-button>
     </div>
 
     <div class="divide-y divide-neutral-800 flex flex-col">
       <todo-item
-        v-for="todo in appStore.todos"
+        v-for="todo in appStore.getTodosByStatus"
         :todo-id="todo.id"
         :todo-name="todo.name"
         :is-completed="todo.isCompleted"
