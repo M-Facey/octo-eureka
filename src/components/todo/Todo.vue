@@ -106,6 +106,22 @@ const add = () => {
         @trigger-event="appStore.deleteCompletedTodo"
       />
     </div>
+
+    <div class="w-max absolute -bottom-7 left-1/2 -translate-x-1/2">
+      <a
+        target="_blank"
+        href="https://icons8.com/icon/w0JUG294E8rU/todo-list"
+        class="text-neutral-600 hover:text-neutral-900 font-bold"
+        >Todo List</a
+      >
+      icon by
+      <a
+        target="_blank"
+        href="https://icons8.com"
+        class="text-neutral-600 hover:text-neutral-900 font-bold"
+        >Icons8</a
+      >
+    </div>
   </div>
 </template>
 
