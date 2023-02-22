@@ -1,8 +1,7 @@
 name: vitest
 on:
-  push:
-    branches:
-      - main
+  - push
+
 jobs:
   run-unit-tests:
     runs-on: ubuntu-latest
