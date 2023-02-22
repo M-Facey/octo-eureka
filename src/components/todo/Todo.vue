@@ -61,9 +61,14 @@ const add = () => {
       </todo-button>
     </div>
 
-    <div class="divide-y divide-neutral-800 flex flex-col">
+    <transition-group
+      name="todo-list"
+      tag="div"
+      class="divide-y divide-neutral-800 flex flex-col"
+    >
       <todo-item
         v-for="todo in appStore.getTodosByStatus"
+        :key="todo.id"
         :todo-id="todo.id"
         :todo-name="todo.name"
         :is-completed="todo.isCompleted"
@@ -71,6 +76,24 @@ const add = () => {
         @delete-task="appStore.deleteTodo(todo.id)"
         class="py-3"
       />
-    </div>
+    </transition-group>
   </div>
 </template>
+
+<style scoped>
+.todo-list-move,
+.todo-list-enter-active,
+.todo-list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.todo-list-enter-from,
+.todo-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.todo-list-leave-active {
+  position: absolute;
+}
+</style>
