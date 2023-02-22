@@ -9,6 +9,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "test:unit-dev": "vitest --environment jsdom",
+    "test:unit": "vitest run --environment jsdom",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
