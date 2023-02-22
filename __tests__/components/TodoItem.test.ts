@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import TodoItem from "../../components/todo/TodoItem.vue";
+import TodoItem from "@/components/todo/TodoItem.vue";
 
 describe("Todo Item Component", () => {
   it("shoul render", () => {
