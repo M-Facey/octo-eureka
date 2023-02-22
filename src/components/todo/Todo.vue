@@ -16,6 +16,8 @@ const newTodo = ref("");
 const appStore = useAppStore();
 
 const add = () => {
+  if (!newTodo.value.trim()) return;
+
   appStore.addTodo({
     id: nanoid(),
     name: newTodo.value,
@@ -28,7 +30,7 @@ const add = () => {
 
 <template>
   <div
-    class="absolute top-[58%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-full max-w-[700px] bg-neutral-900 rounded-lg"
+    class="absolute top-[58%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-full max-w-[700px] flex flex-col bg-neutral-900 rounded-lg"
   >
     <div class="flex gap-3 p-4">
       <todo-input
@@ -37,6 +39,7 @@ const add = () => {
         v-model="newTodo"
         :is-optional="false"
         class="flex-grow"
+        @trigger-event="add"
       />
       <todo-button
         button-label="Add Todo"
@@ -61,22 +64,33 @@ const add = () => {
       </todo-button>
     </div>
 
-    <transition-group
-      name="todo-list"
-      tag="div"
-      class="divide-y divide-neutral-800 flex flex-col"
-    >
-      <todo-item
-        v-for="todo in appStore.getTodosByStatus"
-        :key="todo.id"
-        :todo-id="todo.id"
-        :todo-name="todo.name"
-        :is-completed="todo.isCompleted"
-        @toggle-completed="appStore.toggleIsCompleted(todo.id)"
-        @delete-task="appStore.deleteTodo(todo.id)"
-        class="py-3"
-      />
-    </transition-group>
+    <div class="flex-grow overflow-x-hidden overscroll-y-auto relative">
+      <transition-group
+        name="todo-list"
+        tag="div"
+        class="divide-y divide-neutral-800 flex flex-col overscroll-y-auto"
+      >
+        <todo-item
+          v-for="todo in appStore.getTodosByStatus"
+          :key="todo.id"
+          :todo-id="todo.id"
+          :todo-name="todo.name"
+          :is-completed="todo.isCompleted"
+          @toggle-completed="appStore.toggleIsCompleted(todo.id)"
+          @delete-task="appStore.deleteTodo(todo.id)"
+          class="py-3"
+        />
+      </transition-group>
+    </div>
+
+    <div class="flex items-center justify-between px-4 py-3">
+      <p class="text-neutral-600 font-medium">
+        <span class="text-white"> {{ appStore.getTotalOnGoingTodos }}</span>
+        of {{ appStore.getTotalTodos }} left
+      </p>
+      <div></div>
+      <todo-button button-label="Clear Completed" button-size="sm" />
+    </div>
   </div>
 </template>
 

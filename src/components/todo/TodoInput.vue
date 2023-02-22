@@ -11,7 +11,10 @@ withDefaults(defineProps<Prop>(), {
   label: "",
   isOptional: false,
 });
-defineEmits<{ (e: "update:modelValue", value: string): void }>();
+defineEmits<{
+  (e: "update:modelValue", value: string): void;
+  (e: "triggerEvent"): void;
+}>();
 </script>
 
 <template>
@@ -27,6 +30,7 @@ defineEmits<{ (e: "update:modelValue", value: string): void }>();
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
+      @keypress.enter="$emit('triggerEvent')"
     />
   </div>
 </template>

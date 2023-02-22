@@ -18,6 +18,12 @@ export const useAppStore = defineStore({
 
       return this.todos;
     },
+    getTotalOnGoingTodos(): number {
+      return this.todos.filter((todo) => !todo.isCompleted).length;
+    },
+    getTotalTodos(): number {
+      return this.todos.length;
+    },
   },
   actions: {
     addTodo(todo: Todo) {
