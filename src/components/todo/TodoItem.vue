@@ -35,7 +35,7 @@ defineEmits<{
 
     <p class="ml-2 mr-auto text-neutral-300">{{ todoName }}</p>
 
-    <todo-button button-size="sm" @click="$emit('deleteTask', todoId)">
+    <todo-button button-size="sm" @trigger-event="$emit('deleteTask', todoId)">
       <icon-close class="w-5" />
     </todo-button>
   </div>
