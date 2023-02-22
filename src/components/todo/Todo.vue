@@ -46,11 +46,14 @@ const add = () => {
         button-label="Add Todo"
         button-size="sm"
         class="ml-auto"
-        @click="add"
+        @trigger-event="add"
       >
         <icon-add class="w-5" />
       </todo-button>
-      <todo-button button-size="sm" @click="appStore.toogleShowFilterModal()">
+      <todo-button
+        button-size="sm"
+        @trigger-event="appStore.toogleShowFilterModal"
+      >
         <div class="relative">
           <icon-filter class="w-5" />
           <filter-modal
@@ -94,7 +97,14 @@ const add = () => {
         of {{ appStore.getTotalTodos }} left
       </p>
       <div></div>
-      <todo-button button-label="Clear Completed" button-size="sm" />
+      <todo-button
+        button-label="Clear Completed"
+        button-size="sm"
+        :is-disabled="
+          !appStore.hasCompletedTodos || !appStore.getTodosByStatus.length
+        "
+        @trigger-event="appStore.deleteCompletedTodo"
+      />
     </div>
   </div>
 </template>

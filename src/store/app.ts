@@ -24,6 +24,9 @@ export const useAppStore = defineStore({
     getTotalTodos(): number {
       return this.todos.length;
     },
+    hasCompletedTodos(): boolean {
+      return this.todos.find((todo) => todo.isCompleted) !== undefined;
+    },
   },
   actions: {
     addTodo(todo: Todo) {
