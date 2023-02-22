@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`Todo Item Component > shoul render 1`] = `
+exports[`Todo Item Component > should render 1`] = `
 "<div class=\\"w-full flex items-center px-4\\"><label for=\\"taskCheck\\" class=\\"relative w-6 h-6 flex items-center justify-center text-white border border-neutral-500 rounded\\"><input id=\\"1\\" type=\\"checkbox\\" class=\\"absolute w-full h-full opacity-0 peer\\"><svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" class=\\"feather feather-check w-4 opacity-0 peer-checked:opacity-100\\">
       <polyline points=\\"20 6 9 17 4 12\\"></polyline>
     </svg></label>
