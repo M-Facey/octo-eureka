@@ -7,6 +7,7 @@ import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";
 import TodoItem from "./TodoItem.vue";
 import FilterModal from "./FilterModal.vue";
+import EmptyTodo from "./EmptyTodo.vue";
 
 import IconAdd from "../icons/IconAdd.vue";
 import IconFilter from "../icons/IconFilter.vue";
@@ -64,11 +65,14 @@ const add = () => {
       </todo-button>
     </div>
 
-    <div class="flex-grow overflow-x-hidden overscroll-y-auto relative">
+    <div
+      v-if="appStore.getTodosByStatus.length"
+      class="relative flex flex-grow overflow-x-hidden overscroll-y-auto"
+    >
       <transition-group
         name="todo-list"
         tag="div"
-        class="divide-y divide-neutral-800 flex flex-col overscroll-y-auto"
+        class="divide-y divide-neutral-800 flex flex-grow flex-col overscroll-y-auto"
       >
         <todo-item
           v-for="todo in appStore.getTodosByStatus"
@@ -82,6 +86,7 @@ const add = () => {
         />
       </transition-group>
     </div>
+    <empty-todo v-else class="h-full" />
 
     <div class="flex items-center justify-between px-4 py-3">
       <p class="text-neutral-600 font-medium">
