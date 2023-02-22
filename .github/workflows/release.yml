@@ -50,4 +50,4 @@ jobs:
       - name: Create release
         run: pnpx semantic-release
         env:
-          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
