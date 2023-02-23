@@ -1,3 +1,3 @@
 // Vitest Snapshot v1
 
-exports[`Todo Button Component > should render 1`] = `"<button class=\\"text-neutral-300 rounded flex gap-1 px-8 py-4 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 bg-neutral-800\\"> Button</button>"`;
+exports[`Todo Button Component > should render 1`] = `"<button class=\\"text-neutral-300 rounded flex gap-1 px-8 py-4 bg-neutral-800 hover:bg-neutral-700\\"> Button</button>"`;
