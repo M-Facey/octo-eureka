@@ -16,7 +16,7 @@ import IconGrid from "../icons/IconGrid.vue";
 const newTodo = ref("");
 const appStore = useAppStore();
 
-const add = () => {
+const addNewTodo = () => {
   if (!newTodo.value.trim()) return;
 
   appStore.addTodo({
@@ -25,6 +25,10 @@ const add = () => {
     isCompleted: false,
   });
 
+  clearTodoInput();
+};
+
+const clearTodoInput = () => {
   newTodo.value = "";
 };
 </script>
@@ -40,13 +44,14 @@ const add = () => {
         v-model="newTodo"
         :is-optional="false"
         class="flex-grow"
-        @trigger-event="add"
+        @trigger-event-on-enter="addNewTodo"
+        @clear-todo-input="clearTodoInput"
       />
       <todo-button
         button-label="Add Todo"
         button-size="sm"
         class="ml-auto"
-        @trigger-event="add"
+        @trigger-event="addNewTodo"
       >
         <icon-add class="w-5" />
       </todo-button>
