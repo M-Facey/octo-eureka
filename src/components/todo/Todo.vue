@@ -50,6 +50,7 @@ const clearTodoInput = () => {
       <todo-button
         button-label="Add Todo"
         button-size="sm"
+        :is-disabled="!newTodo"
         class="ml-auto"
         @trigger-event="addNewTodo"
       >
