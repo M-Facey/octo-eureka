@@ -45,7 +45,7 @@ export const useAppStore = defineStore({
     changeStatus(status: string) {
       this.viewingStatus = status;
     },
-    toogleShowFilterModal() {
+    toggleShowFilterModal() {
       this.showFilterModal = !this.showFilterModal;
     },
   },
