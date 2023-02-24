@@ -23,7 +23,7 @@ defineEmits<{ (e: "triggerEvent"): void }>();
       'p-2': buttonSize === 'sm',
       'px-3 py-2': buttonSize === 'md',
       'px-8 py-4': buttonSize === 'lg',
-      'font-medium text-neutral-600 bg-neutral-700': isDisabled,
+      'font-medium text-neutral-500 bg-neutral-700': isDisabled,
       'bg-neutral-700 hover:bg-neutral-900': isIconButton,
       'bg-neutral-800 hover:bg-neutral-700': !isIconButton && !isDisabled,
     }"
