@@ -1,0 +1,67 @@
+<script lang="ts" setup>
+import { ref } from "vue";
+import { useAppStore } from "@/store/app";
+
+import IconCheck from "../icons/IconCheck.vue";
+
+const appStore = useAppStore();
+const sortOrders = ref([
+  {
+    value: "nameAsc",
+    displayName: "Name (asc)",
+  },
+  {
+    value: "nameDesc",
+    displayName: "Name (desc)",
+  },
+  {
+    value: "newest",
+    displayName: "Newest",
+  },
+  {
+    value: "oldest",
+    displayName: "Oldest",
+  },
+]);
+
+const changeSortOrder = (status: string) => {
+  appStore.setSortBy(status);
+  setTimeout(() => {
+    appStore.setShowModal("sortBy");
+  }, 250);
+};
+</script>
+
+<template>
+  <div
+    class="absolute top-full -right-3 translate-y-5 flex flex-col gap-1 bg-neutral-800 border border-neutral-700/70 p-2 cursor-default rounded-lg"
+  >
+    <div v-for="order in sortOrders" class="flex items-center gap-x-2">
+      <label
+        :for="order.value"
+        class="relative w-4 h-4 flex items-center justify-center text-white border border-neutral-500 hover:bg-neutral-900 cursor-pointer rounded group"
+        @click.stop="changeSortOrder(order.value)"
+      >
+        <input
+          :id="order.value"
+          type="radio"
+          class="absolute w-full h-full opacity-0 peer"
+          :checked="order.value === appStore.sortBy"
+        />
+        <icon-check
+          class="w-3 opacity-0 peer-checked:opacity-100 group-hover:opacity-40"
+        />
+      </label>
+      <p
+        class="w-max cursor-pointer"
+        :class="{
+          'text-neutral-600 hover:text-neutral-400':
+            order.value !== appStore.sortBy,
+        }"
+        @click="changeSortOrder(order.value)"
+      >
+        {{ order.displayName }}
+      </p>
+    </div>
+  </div>
+</template>
