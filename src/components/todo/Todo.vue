@@ -7,6 +7,7 @@ import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";
 import TodoItem from "./TodoItem.vue";
 import FilterModal from "./FilterModal.vue";
+import SortModal from "./SortModal.vue";
 import EmptyTodo from "./EmptyTodo.vue";
 
 import IconAdd from "../icons/IconAdd.vue";
@@ -26,6 +27,7 @@ const addNewTodo = () => {
     id: nanoid(),
     name: newTodo.value,
     isCompleted: false,
+    createdAt: new Date(),
   });
 
   clearTodoInput();
@@ -62,13 +64,13 @@ const clearTodoInput = () => {
 
       <todo-button
         button-size="sm"
-        @trigger-event="appStore.toggleShowFilterModal"
+        @trigger-event="appStore.setShowModal('filter')"
       >
         <div class="relative">
           <icon-filter class="w-5" />
           <transition name="todo-fade">
             <filter-modal
-              v-if="appStore.showFilterModal"
+              v-if="appStore.showModal === 'filter'"
               class="absolute z-10"
               @click.stop
             />
@@ -78,8 +80,20 @@ const clearTodoInput = () => {
       <todo-button button-size="sm">
         <icon-grid class="w-5" />
       </todo-button>
-      <todo-button button-size="sm">
-        <icon-sort class="w-5 h-[1.20rem] text-neutral-200 mt-[3px]" />
+      <todo-button
+        button-size="sm"
+        @trigger-event="appStore.setShowModal('sortBy')"
+      >
+        <div class="relative">
+          <icon-sort class="w-5 h-[1.20rem] text-neutral-200 mt-[3px]" />
+          <transition name="todo-fade">
+            <sort-modal
+              v-if="appStore.showModal === 'sortBy'"
+              class="absolute z-10"
+              @click.stop
+            />
+          </transition>
+        </div>
       </todo-button>
       <todo-button button-size="sm">
         <icon-sun class="w-[1.20rem]" />
