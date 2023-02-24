@@ -23,7 +23,7 @@ const statuses = ref([
 const changeStatus = (status: string) => {
   appStore.changeStatus(status);
   setTimeout(() => {
-    appStore.showFilterModal = false;
+    appStore.setShowModal("filter");
   }, 250);
 };
 </script>
