@@ -56,17 +56,20 @@ const clearTodoInput = () => {
       >
         <icon-add class="w-5" />
       </todo-button>
+
       <todo-button
         button-size="sm"
-        @trigger-event="appStore.toogleShowFilterModal"
+        @trigger-event="appStore.toggleShowFilterModal"
       >
         <div class="relative">
           <icon-filter class="w-5" />
-          <filter-modal
-            v-if="appStore.showFilterModal"
-            class="absolute z-10"
-            @click.stop
-          />
+          <transition name="todo-fade">
+            <filter-modal
+              v-if="appStore.showFilterModal"
+              class="absolute z-10"
+              @click.stop
+            />
+          </transition>
         </div>
       </todo-button>
       <todo-button button-size="sm">
@@ -146,5 +149,15 @@ const clearTodoInput = () => {
 
 .todo-list-leave-active {
   position: absolute;
+}
+
+.todo-fade-enter-active,
+.todo-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.todo-fade-enter-from,
+.todo-fade-leave-to {
+  opacity: 0;
 }
 </style>
