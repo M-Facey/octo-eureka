@@ -12,6 +12,9 @@ import EmptyTodo from "./EmptyTodo.vue";
 import IconAdd from "../icons/IconAdd.vue";
 import IconFilter from "../icons/IconFilter.vue";
 import IconGrid from "../icons/IconGrid.vue";
+import IconSort from "../icons/IconSort.vue";
+import IconSun from "../icons/IconSun.vue";
+import IconMoon from "../icons/IconMoon.vue";
 
 const newTodo = ref("");
 const appStore = useAppStore();
@@ -74,6 +77,13 @@ const clearTodoInput = () => {
       </todo-button>
       <todo-button button-size="sm">
         <icon-grid class="w-5" />
+      </todo-button>
+      <todo-button button-size="sm">
+        <icon-sort class="w-5 h-[1.20rem] text-neutral-200 mt-[3px]" />
+      </todo-button>
+      <todo-button button-size="sm">
+        <icon-sun class="w-[1.20rem]" />
+        <!-- <icon-moon class="w-5" /> -->
       </todo-button>
     </div>
 
