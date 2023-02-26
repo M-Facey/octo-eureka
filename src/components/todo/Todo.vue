@@ -108,7 +108,7 @@ const clearTodoInput = () => {
       <transition-group
         name="todo-list"
         tag="div"
-        class="divide-y divide-neutral-800 flex flex-grow flex-col overscroll-y-auto"
+        class="flex flex-grow flex-col gap-y-3 overscroll-y-auto"
       >
         <todo-item
           v-for="todo in appStore.getTodosByStatus"
@@ -118,7 +118,6 @@ const clearTodoInput = () => {
           :is-completed="todo.isCompleted"
           @toggle-completed="appStore.toggleIsCompleted(todo.id)"
           @delete-task="appStore.deleteTodo(todo.id)"
-          class="py-3"
         />
       </transition-group>
     </div>

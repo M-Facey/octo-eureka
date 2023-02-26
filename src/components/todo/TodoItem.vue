@@ -18,7 +18,9 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="w-full flex items-center px-4">
+  <div
+    class="card group flex items-center border border-neutral-800 hover:border-transparent hover:bg-black mx-3 p-3 rounded-lg"
+  >
     <label
       for="taskCheck"
       class="relative w-6 h-6 flex items-center justify-center text-white border border-neutral-500 rounded"
@@ -33,10 +35,48 @@ defineEmits<{
       <icon-check class="w-4 opacity-0 peer-checked:opacity-100" />
     </label>
 
-    <p class="ml-2 mr-auto text-neutral-300">{{ todoName }}</p>
+    <p
+      class="font-bold tracking-wide ml-2 mr-auto"
+      :class="{
+        'completed text-neutral-500': isCompleted,
+        'text-neutral-300': !isCompleted,
+      }"
+    >
+      {{ todoName }}
+    </p>
 
-    <todo-button button-size="sm" @trigger-event="$emit('deleteTask', todoId)">
-      <icon-close class="w-5" />
-    </todo-button>
+    <div
+      class="flex gap-x-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+    >
+      <todo-button
+        button-size="sm"
+        @trigger-event="$emit('deleteTask', todoId)"
+      >
+        <icon-close class="w-5" />
+      </todo-button>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.card {
+  width: calc(100% - 32px);
+}
+
+.completed {
+  position: relative;
+}
+
+.completed::before {
+  content: "";
+  position: absolute;
+
+  top: 50%;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+
+  transform: translateY(-50%);
+  @apply bg-neutral-300;
+}
+</style>
