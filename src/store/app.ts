@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Todo } from "@/types";
+import { strToDate } from "@/utils";
 
 export const useAppStore = defineStore({
   id: "app",
@@ -34,13 +35,15 @@ export const useAppStore = defineStore({
 
       if (this.sortBy === "newest") {
         return this.todos.sort(
-          (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+          (a, b) =>
+            strToDate(b.createdAt).getTime() - strToDate(a.createdAt).getTime()
         );
       }
 
       // returns the oldest by default
       return this.todos.sort(
-        (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
+        (a, b) =>
+          strToDate(a.createdAt).getTime() - strToDate(b.createdAt).getTime()
       );
     },
     getTotalOnGoingTodos(): number {
