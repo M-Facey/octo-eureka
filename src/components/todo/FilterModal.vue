@@ -21,6 +21,8 @@ const statuses = ref([
 ]);
 
 const changeStatus = (status: string) => {
+  if (appStore.viewingStatus === status) return;
+
   appStore.changeStatus(status);
   setTimeout(() => {
     appStore.setShowModal("filter");
