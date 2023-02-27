@@ -25,6 +25,8 @@ const sortOrders = ref([
 ]);
 
 const changeSortOrder = (status: string) => {
+  if (appStore.sortBy === status) return;
+
   appStore.setSortBy(status);
   setTimeout(() => {
     appStore.setShowModal("sortBy");
