@@ -8,7 +8,7 @@
       <div
         class="logo w-max bg-gradient-to-t from-neutral-900/80 border-4 border-neutral-700 p-2 rounded-xl"
       >
-        <img src="@/assets/logo.png" alt="" class="w-8" />
+        <img src="@/assets/logo.png" alt="" class="w-8 h-8" />
       </div>
       <h1 class="text-6xl text-neutral-500 font-gloock">Octa Eureka</h1>
     </div>
