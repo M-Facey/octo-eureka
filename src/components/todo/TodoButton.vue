@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 export interface Prop {
-  buttonLabel?: string;
+  buttonLabel: string;
   buttonSize: "lg" | "md" | "sm" | "xs";
   isIconButton?: boolean;
   isDisabled?: boolean;
+  showLabel?: boolean;
 }
 
 withDefaults(defineProps<Prop>(), {
-  buttonLabel: "",
   isIconButton: false,
   isDisabled: false,
+  showLabel: false,
 });
 
 defineEmits<{ (e: "triggerEvent"): void }>();
@@ -17,6 +18,7 @@ defineEmits<{ (e: "triggerEvent"): void }>();
 
 <template>
   <button
+    :aria-label="buttonLabel"
     class="text-neutral-300 rounded flex gap-1"
     :class="{
       'px-1.5 py-0.5': buttonSize === 'xs',
@@ -31,6 +33,8 @@ defineEmits<{ (e: "triggerEvent"): void }>();
     @click="$emit('triggerEvent')"
   >
     <slot />
-    {{ buttonLabel }}
+    <p v-if="showLabel">
+      {{ buttonLabel }}
+    </p>
   </button>
 </template>

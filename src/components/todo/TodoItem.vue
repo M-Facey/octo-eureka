@@ -49,6 +49,7 @@ defineEmits<{
       class="flex gap-x-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
     >
       <todo-button
+        button-label="Delete Todo"
         button-size="sm"
         @trigger-event="$emit('deleteTask', todoId)"
       >

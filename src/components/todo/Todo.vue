@@ -55,6 +55,7 @@ const clearTodoInput = () => {
       <todo-button
         button-label="Add Todo"
         button-size="sm"
+        :show-label="true"
         :is-disabled="!newTodo"
         class="ml-auto"
         @trigger-event="addNewTodo"
@@ -63,6 +64,7 @@ const clearTodoInput = () => {
       </todo-button>
 
       <todo-button
+        button-label="Filter Todos"
         button-size="sm"
         @trigger-event="appStore.setShowModal('filter')"
       >
@@ -77,10 +79,11 @@ const clearTodoInput = () => {
           </transition>
         </div>
       </todo-button>
-      <todo-button button-size="sm">
+      <todo-button button-label="Change Layout" button-size="sm">
         <icon-grid class="w-5" />
       </todo-button>
       <todo-button
+        button-label="Sort Todos"
         button-size="sm"
         @trigger-event="appStore.setShowModal('sortBy')"
       >
@@ -95,7 +98,7 @@ const clearTodoInput = () => {
           </transition>
         </div>
       </todo-button>
-      <todo-button button-size="sm">
+      <todo-button button-label="Change Theme" button-size="sm">
         <icon-sun class="w-[1.20rem]" />
         <!-- <icon-moon class="w-5" /> -->
       </todo-button>
@@ -132,6 +135,7 @@ const clearTodoInput = () => {
       <todo-button
         button-label="Clear Completed"
         button-size="sm"
+        :show-label="true"
         :is-disabled="
           !appStore.hasCompletedTodos || !appStore.getTodosByStatus.length
         "
