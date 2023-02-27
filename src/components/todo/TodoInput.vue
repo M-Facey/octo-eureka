@@ -47,6 +47,7 @@ defineEmits<{
       <transition name="fade">
         <todo-button
           v-if="modelValue.length !== 0 && hasSearchButton"
+          button-label="Search Todos"
           button-size="xs"
           :is-icon-button="true"
         >
@@ -55,6 +56,7 @@ defineEmits<{
       </transition>
       <transition name="fade">
         <todo-button
+          button-label="Clear Todo Input"
           v-if="modelValue.length !== 0 && hasClearButton"
           button-size="xs"
           :is-icon-button="true"
