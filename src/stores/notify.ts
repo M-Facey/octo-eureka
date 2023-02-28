@@ -43,7 +43,13 @@ export const useNotifyStore = defineStore({
         }, this.duration);
       }
     },
-    closeNotification(notification: Notification, clearTimer: boolean) {
+    closeNotification(
+      notification: Notification | undefined,
+      clearTimer: boolean
+    ) {
+      // checks if notifications is undefined
+      if (!notification) return;
+
       if (clearTimer) {
         clearTimeout(notification.timerId);
       }

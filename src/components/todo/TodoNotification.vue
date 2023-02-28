@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { computed } from "vue";
+import { useAppStore } from "@/stores/app";
+import { useNotifyStore } from "@/stores/notify";
 import TodoButton from "./TodoButton.vue";
 
 import IconClose from "../icons/IconClose.vue";
 import IconUndo from "../icons/IconUndo.vue";
+import { nanoid } from "nanoid";
 
 export interface Props {
   id: string;
@@ -16,9 +19,21 @@ const prop = withDefaults(defineProps<Props>(), {
   canUndo: false,
 });
 
+const appStore = useAppStore();
+const notifyStore = useNotifyStore();
+
 const hasErrorType = computed(
   () => prop.type === "delete" || prop.type === "limit"
 );
+
+const currentNotification = computed(() =>
+  notifyStore.notifications.find((notify) => notify.id === prop.id)
+);
+
+const undoDeleteAction = () => {
+  appStore.undoDeletedTodos();
+  notifyStore.closeNotification(currentNotification.value, true);
+};
 </script>
 
 <template>
@@ -31,11 +46,20 @@ const hasErrorType = computed(
   >
     <p class="">{{ detail }}</p>
 
-    <todo-button button-label="Undo" button-size="sm" class="ml-4">
+    <todo-button
+      button-label="Undo"
+      button-size="sm"
+      class="ml-4"
+      @trigger-event="undoDeleteAction"
+    >
       <icon-undo class="w-5 px-0.5" />
     </todo-button>
 
-    <todo-button button-label="Close Notification" button-size="sm">
+    <todo-button
+      button-label="Close Notification"
+      button-size="sm"
+      @trigger-event="notifyStore.closeNotification(currentNotification, true)"
+    >
       <icon-close class="w-5" />
     </todo-button>
   </div>

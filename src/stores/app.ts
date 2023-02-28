@@ -89,7 +89,6 @@ export const useAppStore = defineStore({
     },
     undoDeletedTodos() {
       this.todos.push(...this.deletedTodos);
-      this.deletedTodos = [];
     },
     changeStatus(status: string) {
       this.viewingStatus = status;
