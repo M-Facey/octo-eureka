@@ -3,6 +3,7 @@ import { ref, watch } from "vue";
 import { nanoid } from "nanoid";
 import { useAppStore } from "@/stores/app";
 import { useNotifyStore } from "@/stores/notify";
+import { useThemeStore } from "@/stores/theme";
 
 import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";
@@ -20,8 +21,10 @@ import IconSun from "../icons/IconSun.vue";
 import IconMoon from "../icons/IconMoon.vue";
 
 const newTodo = ref("");
+
 const appStore = useAppStore();
 const notifyStore = useNotifyStore();
+const themeStore = useThemeStore();
 
 const addNewTodo = () => {
   if (!newTodo.value.trim()) return;
@@ -38,6 +41,22 @@ const addNewTodo = () => {
 
 const clearTodoInput = () => {
   newTodo.value = "";
+};
+
+const setTheme = () => {
+  themeStore.currentTheme === "dark"
+    ? themeStore.changeTheme("light")
+    : themeStore.currentTheme === "light"
+    ? themeStore.changeTheme("system")
+    : themeStore.changeTheme("dark");
+
+  if (themeStore.currentTheme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else if (themeStore.currentTheme === "light") {
+    document.documentElement.classList.remove("dark");
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
+  }
 };
 
 watch(
@@ -110,9 +129,16 @@ watch(
           </transition>
         </div>
       </todo-button>
-      <todo-button button-label="Change Theme" button-size="sm">
-        <icon-sun class="w-[1.20rem]" />
-        <!-- <icon-moon class="w-5" /> -->
+      <todo-button
+        button-label="Change Theme"
+        button-size="sm"
+        @trigger-event="setTheme()"
+      >
+        <icon-sun
+          v-show="themeStore.currentTheme === 'dark'"
+          class="w-[1.20rem]"
+        />
+        <icon-moon v-show="themeStore.currentTheme === 'light'" class="w-5" />
       </todo-button>
     </div>
 
