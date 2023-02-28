@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { nanoid } from "nanoid";
 import { useAppStore } from "@/stores/app";
+import { useNotifyStore } from "@/stores/notify";
 
 import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";
@@ -20,6 +21,7 @@ import IconMoon from "../icons/IconMoon.vue";
 
 const newTodo = ref("");
 const appStore = useAppStore();
+const notifyStore = useNotifyStore();
 
 const addNewTodo = () => {
   if (!newTodo.value.trim()) return;
@@ -37,6 +39,15 @@ const addNewTodo = () => {
 const clearTodoInput = () => {
   newTodo.value = "";
 };
+
+watch(
+  () => appStore.getTotalOnGoingTodos,
+  (total) => {
+    if (total === 0) {
+      notifyStore.addNotification("success", "You've completed all the todos");
+    }
+  }
+);
 </script>
 
 <template>
