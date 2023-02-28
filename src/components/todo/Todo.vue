@@ -9,6 +9,7 @@ import TodoItem from "./TodoItem.vue";
 import FilterModal from "./FilterModal.vue";
 import SortModal from "./SortModal.vue";
 import EmptyTodo from "./EmptyTodo.vue";
+import TodoNotificationList from "./TodoNotificationList.vue";
 
 import IconAdd from "../icons/IconAdd.vue";
 import IconFilter from "../icons/IconFilter.vue";
@@ -158,6 +159,8 @@ const clearTodoInput = () => {
         >Icons8</a
       >
     </div>
+
+    <todo-notification-list />
   </div>
 </template>
 
