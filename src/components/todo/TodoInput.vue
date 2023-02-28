@@ -56,8 +56,8 @@ defineEmits<{
       </transition>
       <transition name="fade">
         <todo-button
-          button-label="Clear Todo Input"
           v-if="modelValue.length !== 0 && hasClearButton"
+          button-label="Clear Todo Input"
           button-size="xs"
           :is-icon-button="true"
           @trigger-event="$emit('clearTodoInput')"
