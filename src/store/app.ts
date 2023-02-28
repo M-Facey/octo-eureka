@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useNotifyStore } from "./notify";
 import type { Todo } from "@/types";
 import { strToDate } from "@/utils";
 
@@ -58,6 +59,15 @@ export const useAppStore = defineStore({
   },
   actions: {
     addTodo(todo: Todo) {
+      const notifyStore = useNotifyStore();
+
+      if (this.getTotalTodos >= 50) {
+        notifyStore.addNotification(
+          "delete",
+          "You reached the todo list limit"
+        );
+        return;
+      }
       this.todos.push(todo);
     },
     toggleIsCompleted(id: string) {
