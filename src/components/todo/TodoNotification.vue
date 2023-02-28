@@ -6,7 +6,6 @@ import TodoButton from "./TodoButton.vue";
 
 import IconClose from "../icons/IconClose.vue";
 import IconUndo from "../icons/IconUndo.vue";
-import { nanoid } from "nanoid";
 
 export interface Props {
   id: string;
@@ -47,6 +46,7 @@ const undoDeleteAction = () => {
     <p class="">{{ detail }}</p>
 
     <todo-button
+      v-if="canUndo"
       button-label="Undo"
       button-size="sm"
       class="ml-4"

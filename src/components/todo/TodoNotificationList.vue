@@ -8,10 +8,11 @@ const notifyStore = useNotifyStore();
 <template>
   <div class="absolute bottom-4 w-full flex flex-col gap-y-2 items-center">
     <todo-notification
-      v-for="{ id, type, detail } in notifyStore.notifications"
+      v-for="{ id, type, detail, canUndo } in notifyStore.notifications"
       :id="id"
       :type="type"
       :detail="detail"
+      :can-undo="canUndo"
     />
   </div>
 </template>
