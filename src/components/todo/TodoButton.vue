@@ -1,16 +1,20 @@
 <script lang="ts" setup>
+import TodoTooltip from "./TodoTooltip.vue";
+
 export interface Prop {
   buttonLabel: string;
   buttonSize: "lg" | "md" | "sm" | "xs";
   isIconButton?: boolean;
   isDisabled?: boolean;
   showLabel?: boolean;
+  tooltip?: string;
 }
 
 withDefaults(defineProps<Prop>(), {
   isIconButton: false,
   isDisabled: false,
   showLabel: false,
+  tooltip: "",
 });
 
 defineEmits<{ (e: "triggerEvent"): void }>();
@@ -19,7 +23,7 @@ defineEmits<{ (e: "triggerEvent"): void }>();
 <template>
   <button
     :aria-label="buttonLabel"
-    class="text-neutral-300 rounded flex gap-1"
+    class="group/btn relative text-neutral-300 border border-transparent focus:border-neutral-500 rounded flex gap-1"
     :class="{
       'px-1.5 py-0.5': buttonSize === 'xs',
       'p-2': buttonSize === 'sm',
@@ -36,5 +40,11 @@ defineEmits<{ (e: "triggerEvent"): void }>();
     <p v-if="showLabel">
       {{ buttonLabel }}
     </p>
+
+    <todo-tooltip
+      v-if="tooltip"
+      :text="tooltip"
+      class="group-hover/btn:block group-focus/btn:hidden hidden"
+    />
   </button>
 </template>
