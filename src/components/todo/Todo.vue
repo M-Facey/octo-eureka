@@ -19,6 +19,7 @@ import IconGrid from "../icons/IconGrid.vue";
 import IconSort from "../icons/IconSort.vue";
 import IconSun from "../icons/IconSun.vue";
 import IconMoon from "../icons/IconMoon.vue";
+import IconSystem from "../icons/IconSystem.vue";
 
 const newTodo = ref("");
 
@@ -44,17 +45,15 @@ const clearTodoInput = () => {
 };
 
 const setTheme = () => {
-  themeStore.currentTheme === "dark"
-    ? themeStore.changeTheme("light")
-    : themeStore.currentTheme === "light"
-    ? themeStore.changeTheme("system")
-    : themeStore.changeTheme("dark");
+  const { getNextTheme, changeToNextTheme } = themeStore;
+  changeToNextTheme();
 
-  if (themeStore.currentTheme === "dark") {
-    document.documentElement.classList.add("dark");
-  } else if (themeStore.currentTheme === "light") {
+  if (getNextTheme === "light") {
     document.documentElement.classList.remove("dark");
-  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  } else if (
+    getNextTheme === "dark" ||
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
     document.documentElement.classList.add("dark");
   }
 };
@@ -135,10 +134,11 @@ watch(
         @trigger-event="setTheme()"
       >
         <icon-sun
-          v-show="themeStore.currentTheme === 'dark'"
+          v-show="themeStore.getTheme === 'light'"
           class="w-[1.20rem]"
         />
-        <icon-moon v-show="themeStore.currentTheme === 'light'" class="w-5" />
+        <icon-moon v-show="themeStore.getTheme === 'dark'" class="w-5" />
+        <icon-system v-show="themeStore.getTheme === 'system'" class="w-5" />
       </todo-button>
     </div>
 
