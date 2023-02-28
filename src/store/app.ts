@@ -23,15 +23,11 @@ export const useAppStore = defineStore({
     },
     getTodoBySortOrder(): Todo[] {
       if (this.sortBy === "nameAsc") {
-        return this.getTodosByStatus.sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
+        return this.todos.sort((a, b) => a.name.localeCompare(b.name));
       }
 
       if (this.sortBy === "nameDesc") {
-        return this.getTodosByStatus.sort((a, b) =>
-          b.name.localeCompare(a.name)
-        );
+        return this.todos.sort((a, b) => b.name.localeCompare(a.name));
       }
 
       if (this.sortBy === "newest") {
