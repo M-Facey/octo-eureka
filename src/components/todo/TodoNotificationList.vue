@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import TodoNotification from "./TodoNotification.vue";
-import { useNotifyStore } from "@/store/notify";
+import { useNotifyStore } from "@/stores/notify";
 
 const notifyStore = useNotifyStore();
 </script>

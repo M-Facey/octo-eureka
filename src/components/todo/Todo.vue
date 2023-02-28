@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { nanoid } from "nanoid";
-import { useAppStore } from "@/store/app";
+import { useAppStore } from "@/stores/app";
 
 import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";

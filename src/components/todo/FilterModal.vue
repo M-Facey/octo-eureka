@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useAppStore } from "@/store/app";
+import { useAppStore } from "@/stores/app";
 
 import IconCheck from "../icons/IconCheck.vue";
 
