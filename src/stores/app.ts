@@ -7,6 +7,7 @@ export const useAppStore = defineStore({
   id: "app",
   state: () => ({
     todos: [] as Todo[],
+    deletedTodos: [] as Todo[],
     viewingStatus: "all",
     showModal: "",
     sortBy: "oldest",
@@ -71,10 +72,24 @@ export const useAppStore = defineStore({
       this.todos[todoIndex].isCompleted = !this.todos[todoIndex].isCompleted;
     },
     deleteTodo(id: string) {
+      const notifyStore = useNotifyStore();
+      const currentTodo = this.todos.find((todo) => todo.id === id);
+
+      if (currentTodo) {
+        this.deletedTodos.push(currentTodo);
+        notifyStore.addNotification(
+          "delete",
+          `You've deleted ${this.deletedTodos.length} todos`
+        );
+      }
       this.todos = this.todos.filter((todo) => todo.id !== id);
     },
     deleteCompletedTodo() {
       this.todos = this.todos.filter((todo) => !todo.isCompleted);
+    },
+    undoDeletedTodos() {
+      this.todos.push(...this.deletedTodos);
+      this.deletedTodos = [];
     },
     changeStatus(status: string) {
       this.viewingStatus = status;

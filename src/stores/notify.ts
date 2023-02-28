@@ -1,11 +1,13 @@
 import { nanoid } from "nanoid";
 import { defineStore } from "pinia";
+import { useAppStore } from "./app";
 import type { Notification } from "@/types";
 
 export const useNotifyStore = defineStore({
   id: "notify",
   state: () => ({
     notifications: [] as Notification[],
+    duration: 2500,
   }),
   getters: {
     getNotifications(): Notification[] {
@@ -30,17 +32,29 @@ export const useNotifyStore = defineStore({
         this.notifications.push(notification);
 
         notification.timerId = setTimeout(() => {
-          this.notifications = this.notifications.filter(
-            (notify) => notify.id !== notification.id
-          );
-        }, 1000);
+          this.closeNotification(notification, false);
+        }, this.duration);
       } else {
+        this.notifications[prevNotification].detail = detail;
         clearTimeout(this.notifications[prevNotification].timerId);
+
         this.notifications[prevNotification].timerId = setTimeout(() => {
-          this.notifications = this.notifications.filter(
-            (notify) => notify.id !== this.notifications[prevNotification].id
-          );
-        }, 1000);
+          this.closeNotification(this.notifications[prevNotification], false);
+        }, this.duration);
+      }
+    },
+    closeNotification(notification: Notification, clearTimer: boolean) {
+      if (clearTimer) {
+        clearTimeout(notification.timerId);
+      }
+
+      const appStore = useAppStore();
+      this.notifications = this.notifications.filter(
+        (notify) => notify.id !== notification.id
+      );
+
+      if (notification.type === "delete") {
+        appStore.deletedTodos = [];
       }
     },
   },
