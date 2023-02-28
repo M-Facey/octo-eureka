@@ -11,7 +11,7 @@ const notifyStore = useNotifyStore();
 watch(
   () => appStore.getTotalOnGoingTodos,
   (total) => {
-    if (total === 0) {
+    if (total === 0 && appStore.getTotalTodos !== 0) {
       notifyStore.addNotification("success", "You've completed all the todos");
     }
   }
