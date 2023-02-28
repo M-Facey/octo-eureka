@@ -12,9 +12,9 @@ This is a simple todo application created in Vue3 and TailwindCSS.
 | Filter Todo                  |             | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p> |                                                                             |
 | Sort Todo                    |             | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p> |                                                                             |
 | Setup Unit Test              |             | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p> |                                                                             |
-| Setup E2E Test               |             |                                                                        | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p>      |
+| Setup E2E Test               |             | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p> |                                                                             |
 | Add Animations for todo list |             | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p> |                                                                             |
-| Limit No. of Todos           |             |                                                                        | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p>      |
+| Limit No. of Todos           |             | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</p> |                                                                             |
 | Clear todos after 24hrs      |             |                                                                        | <p align="center" style="margin: 0; padding: 0">:white_check_mark:</center> |
 
 ## Project Setup
@@ -39,6 +39,12 @@ pnpm test:unit-dev
 
 ```sh
 pnpm test:unit
+```
+
+### Run E2E Tests
+
+```sh
+pnpm test:e2e
 ```
 
 ### Type-Check, Compile and Minify for Production
