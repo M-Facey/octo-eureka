@@ -37,7 +37,7 @@ const changeStatus = (status: string) => {
     <div v-for="status in statuses" class="flex items-center gap-x-2">
       <label
         :for="status.value"
-        class="relative w-4 h-4 flex items-center justify-center text-white border border-neutral-500 hover:bg-neutral-900 cursor-pointer rounded group"
+        class="relative w-4 h-4 flex items-center justify-center text-white border border-neutral-500 hover:bg-neutral-900 cursor-pointer rounded group/filter"
         @click.stop="changeStatus(status.value)"
       >
         <input
@@ -47,7 +47,7 @@ const changeStatus = (status: string) => {
           :checked="status.value === appStore.viewingStatus"
         />
         <icon-check
-          class="w-3 opacity-0 peer-checked:opacity-100 group-hover:opacity-40"
+          class="w-3 opacity-0 peer-checked:opacity-100 group-hover/filter:opacity-40"
         />
       </label>
       <p
