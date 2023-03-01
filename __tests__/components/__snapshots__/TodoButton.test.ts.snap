@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Todo Button Component > should render 1`] = `
-"<button aria-label=\\"Button\\" class=\\"group/btn relative text-neutral-300 border border-transparent focus:border-neutral-500 rounded flex gap-1 px-8 py-4 bg-neutral-800 hover:bg-neutral-700\\">
+"<button aria-label=\\"Button\\" class=\\"group/btn relative border-2 border-transparent focus:border-neutral-600 dark:focus:border-neutral-500 rounded flex gap-1 px-8 py-4 text-neutral-800 dark:text-neutral-300 bg-neutral-300 dark:bg-neutral-800 hover:bg-neutral-500 dark:hover:bg-neutral-700\\">
   <!--v-if-->
   <!--v-if-->
 </button>"
