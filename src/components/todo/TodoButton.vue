@@ -31,9 +31,9 @@ defineEmits<{ (e: "triggerEvent"): void }>();
       'px-8 py-4': buttonSize === 'lg',
       'text-neutral-500 dark:text-neutral-500 bg-neutral-400 dark:bg-neutral-700':
         isDisabled,
-      'text-neutral-800 dark:text-neutral-300 bg-neutral-00 dark:bg-neutral-700 hover:bg-neutral-500 dark:hover:bg-neutral-900':
+      'text-neutral-800 dark:text-neutral-300 bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-500/50 dark:hover:bg-neutral-900':
         isIconButton,
-      'text-neutral-800 dark:text-neutral-300 bg-neutral-300 dark:bg-neutral-800 hover:bg-neutral-500 dark:hover:bg-neutral-700':
+      'text-neutral-800 dark:text-neutral-300 bg-neutral-300 dark:bg-neutral-800 hover:bg-neutral-500/50 dark:hover:bg-neutral-700':
         !isIconButton && !isDisabled,
     }"
     :disabled="isDisabled"

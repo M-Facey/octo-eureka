@@ -36,14 +36,16 @@ defineEmits<{
       :type="type"
       :placeholder="placeholder"
       :value="modelValue"
-      class="w-full bg-neutral-300 dark:bg-neutral-800 border border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 px-3 py-2 outline-none rounded"
+      class="w-full h-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 px-3 py-2 outline-none rounded-md"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
       @keypress.enter="$emit('triggerEventOnEnter')"
     />
 
-    <div class="absolute top-1/2 right-2 -translate-y-1/2 flex gap-2">
+    <div
+      class="absolute top-1/2 right-1.5 -translate-y-1/2 flex gap-2 mb-[3px]"
+    >
       <transition name="fade">
         <todo-button
           v-if="modelValue.length !== 0 && hasSearchButton"
