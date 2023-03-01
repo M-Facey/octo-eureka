@@ -7,11 +7,12 @@ import { useThemeStore } from "./stores/theme";
 const themeStore = useThemeStore();
 
 onMounted(() => {
-  if (themeStore.currentTheme === "dark") {
-    document.documentElement.classList.add("dark");
-  } else if (themeStore.currentTheme === "light") {
+  if (themeStore.getTheme === "light") {
     document.documentElement.classList.remove("dark");
-  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  } else if (
+    themeStore.getTheme === "dark" ||
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
     document.documentElement.classList.add("dark");
   }
 });
