@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import TodoItem from "./TodoItem.vue";
+import EditTodo from "./EditTodo.vue";
 import EmptyTodo from "./EmptyTodo.vue";
 
 import { useAppStore } from "@/stores/app";
@@ -10,12 +11,12 @@ const appStore = useAppStore();
 <template>
   <div
     v-if="appStore.getTodosByStatus.length"
-    class="relative flex flex-grow overflow-x-hidden overscroll-y-auto"
+    class="relative flex flex-grow overflow-hidden"
   >
     <transition-group
       name="todo-list"
       tag="div"
-      class="flex flex-grow flex-col gap-y-3 overscroll-y-auto"
+      class="relative flex flex-grow flex-col gap-y-3 mx-4 overflow-x-hidden overflow-y-auto"
     >
       <todo-item
         v-for="todo in appStore.getTodosByStatus"
@@ -23,10 +24,13 @@ const appStore = useAppStore();
         :todo-id="todo.id"
         :todo-name="todo.name"
         :is-completed="todo.isCompleted"
+        :can-edit="true"
         @toggle-completed="appStore.toggleIsCompleted(todo.id)"
-        @delete-task="appStore.deleteTodo(todo.id)"
+        @edit-todo="appStore.setSelectedTodo"
+        @delete-todo="appStore.deleteTodo(todo.id)"
       />
     </transition-group>
+    <edit-todo v-if="appStore.isEditing" />
   </div>
   <empty-todo v-else class="h-full" />
 </template>
