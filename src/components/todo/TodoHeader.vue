@@ -79,6 +79,7 @@ const setTheme = () => {
     <todo-button
       button-label="Filter Todos"
       button-size="sm"
+      tooltip="Filter"
       @trigger-event="appStore.setShowModal('filter')"
     >
       <div class="relative">
@@ -98,6 +99,7 @@ const setTheme = () => {
     <todo-button
       button-label="Sort Todos"
       button-size="sm"
+      tooltip="Sort"
       @trigger-event="appStore.setShowModal('sortBy')"
     >
       <div class="relative">
@@ -114,6 +116,7 @@ const setTheme = () => {
     <todo-button
       button-label="Change Theme"
       button-size="sm"
+      tooltip="Theme"
       @trigger-event="setTheme()"
     >
       <icon-sun v-show="themeStore.getTheme === 'light'" class="w-[1.20rem]" />
