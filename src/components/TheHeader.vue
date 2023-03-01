@@ -11,7 +11,7 @@
         <img src="@/assets/logo.png" alt="" class="w-8 h-8" />
       </div>
       <h1 class="text-6xl text-neutral-700 dark:text-neutral-500 font-gloock">
-        Octa Eureka
+        Octo Eureka
       </h1>
     </div>
     <p class="text-xl text-neutral-700 dark:text-neutral-200 font-os mt-3">
