@@ -2,24 +2,29 @@
 import TodoButton from "./TodoButton.vue";
 
 import IconCheck from "../icons/IconCheck.vue";
+import IconEdit from "../icons/IconEdit.vue";
 import IconClose from "../icons/IconClose.vue";
 
 export interface Prop {
   todoId: string;
   todoName: string;
   isCompleted: boolean;
+  canEdit?: boolean;
 }
 
-defineProps<Prop>();
+withDefaults(defineProps<Prop>(), {
+  canEdit: false,
+});
 defineEmits<{
   (e: "toggleCompleted"): void;
-  (e: "deleteTask", id: string): void;
+  (e: "editTodo", id: string): void;
+  (e: "deleteTodo", id: string): void;
 }>();
 </script>
 
 <template>
   <div
-    class="card group flex items-center border border-neutral-800 hover:border-transparent hover:bg-black mx-3 p-3 rounded-lg"
+    class="w-full group flex items-center border border-neutral-800 hover:border-transparent hover:bg-black p-3 rounded-lg"
   >
     <label
       for="taskCheck"
@@ -49,9 +54,17 @@ defineEmits<{
       class="flex gap-x-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
     >
       <todo-button
+        v-if="canEdit"
         button-label="Delete Todo"
         button-size="sm"
-        @trigger-event="$emit('deleteTask', todoId)"
+        @trigger-event="$emit('editTodo', todoId)"
+      >
+        <icon-edit class="w-5" />
+      </todo-button>
+      <todo-button
+        button-label="Delete Todo"
+        button-size="sm"
+        @trigger-event="$emit('deleteTodo', todoId)"
       >
         <icon-close class="w-5" />
       </todo-button>
@@ -60,10 +73,6 @@ defineEmits<{
 </template>
 
 <style scoped>
-.card {
-  width: calc(100% - 32px);
-}
-
 .completed {
   position: relative;
 }
