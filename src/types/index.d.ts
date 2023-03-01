@@ -1,6 +1,8 @@
 export interface Todo {
   id: string;
   name: string;
+  description: string;
+  subtasks: Todo[];
   isCompleted: boolean;
   createdAt: Date;
 }
