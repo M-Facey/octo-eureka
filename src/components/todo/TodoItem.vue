@@ -24,11 +24,11 @@ defineEmits<{
 
 <template>
   <div
-    class="w-full group flex items-center border border-neutral-800 hover:border-transparent hover:bg-black p-3 rounded-lg"
+    class="w-full group flex items-center border bg-neutral-300 dark:bg-transparent dark:border-neutral-800 hover:border-transparent hover:bg-neutral-400 dark:hover:bg-black p-3 rounded-lg"
   >
     <label
       for="taskCheck"
-      class="relative w-6 h-6 flex items-center justify-center text-white border border-neutral-500 rounded"
+      class="relative w-6 h-6 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 rounded"
       @click="$emit('toggleCompleted')"
     >
       <input
@@ -44,7 +44,7 @@ defineEmits<{
       class="font-bold tracking-wide ml-2 mr-auto"
       :class="{
         'completed text-neutral-500': isCompleted,
-        'text-neutral-300': !isCompleted,
+        'text-neutral-900 dark:text-neutral-300': !isCompleted,
       }"
     >
       {{ todoName }}
@@ -87,6 +87,6 @@ defineEmits<{
   height: 2px;
 
   transform: translateY(-50%);
-  @apply bg-neutral-300;
+  @apply bg-neutral-900 dark:bg-neutral-300;
 }
 </style>

@@ -36,12 +36,12 @@ const changeSortOrder = (status: string) => {
 
 <template>
   <div
-    class="absolute top-full -right-3 translate-y-5 flex flex-col gap-1 bg-neutral-800 border border-neutral-700/70 p-2 cursor-default rounded-lg"
+    class="absolute top-full -right-3 translate-y-5 flex flex-col gap-1 bg-neutral-300 dark:bg-neutral-800 border border-neutral-700/70 p-2 cursor-default rounded-lg"
   >
     <div v-for="order in sortOrders" class="flex items-center gap-x-2">
       <label
         :for="order.value"
-        class="relative w-4 h-4 flex items-center justify-center text-white border border-neutral-500 hover:bg-neutral-900 cursor-pointer rounded group/sort"
+        class="relative w-4 h-4 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 hover:bg-neutral-400/30 dark:hover:bg-neutral-900 cursor-pointer rounded group/sort"
         @click.stop="changeSortOrder(order.value)"
       >
         <input

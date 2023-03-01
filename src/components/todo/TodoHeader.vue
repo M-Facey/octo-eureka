@@ -100,7 +100,7 @@ const setTheme = () => {
       @trigger-event="appStore.setShowModal('sortBy')"
     >
       <div class="relative">
-        <icon-sort class="w-5 h-[1.20rem] text-neutral-200 mt-[3px]" />
+        <icon-sort class="w-5 h-[1.20rem] mt-[3px]" />
         <transition name="todo-fade">
           <sort-modal
             v-if="appStore.showModal === 'sortBy'"

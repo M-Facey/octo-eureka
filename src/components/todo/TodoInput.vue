@@ -36,7 +36,7 @@ defineEmits<{
       :type="type"
       :placeholder="placeholder"
       :value="modelValue"
-      class="w-full bg-neutral-800 border border-neutral-700 hover:border-neutral-500 focus:border-neutral-500 focus:ring-4 focus:ring-neutral-600/50 text-neutral-300 px-3 py-2 outline-none rounded"
+      class="w-full bg-neutral-300 dark:bg-neutral-800 border border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 px-3 py-2 outline-none rounded"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "

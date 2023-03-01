@@ -55,7 +55,7 @@ watch(
 <template>
   <div v-if="appStore.selectedTodo" class="flex flex-col w-1/3 h-full mx-3">
     <div class="flex items-center justify-between">
-      <h2 class="text-xl text-white font-bold">
+      <h2 class="text-xl text-neutral-900 dark:text-white font-bold">
         Todo: {{ appStore.selectedTodo.name }}
       </h2>
       <todo-button
@@ -69,11 +69,14 @@ watch(
     </div>
 
     <div class="flex-shrink-0">
-      <label class="text-neutral-400 text-sm tracking-wide">Description</label>
+      <label
+        class="text-neutral-600 dark:text-neutral-400 text-sm tracking-wide"
+        >Description</label
+      >
       <textarea
         v-model="appStore.selectedTodo.description"
         placeholder="Enter description here"
-        class="w-full h-32 mt-1.5 bg-neutral-800 border border-neutral-700 hover:border-neutral-500 focus:border-neutral-500 focus:ring-4 focus:ring-neutral-600/50 text-neutral-300 px-3 py-2 resize-none outline-none rounded"
+        class="w-full h-32 mt-1.5 bg-neutral-300 dark:bg-neutral-800 border border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-900 dark:text-neutral-300 px-3 py-2 resize-none outline-none rounded"
       ></textarea>
     </div>
 
@@ -111,7 +114,7 @@ watch(
         @toggle-completed="appStore.toggleSubtaskIsCompleted(id)"
       ></todo-item>
     </transition-group>
-    <p v-else class="text-white text-center mt-3">
+    <p v-else class="text-neutral-900 dark:text-white text-center mt-3">
       There are no subtasks available
     </p>
   </div>

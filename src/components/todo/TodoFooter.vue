@@ -20,8 +20,10 @@ watch(
 
 <template>
   <div class="flex items-center justify-between px-4 py-3">
-    <p class="text-neutral-600 font-medium">
-      <span class="text-white"> {{ appStore.getTotalOnGoingTodos }}</span>
+    <p class="text-neutral-400 dark:text-neutral-600 font-medium">
+      <span class="text-neutral-900 dark:text-white">
+        {{ appStore.getTotalOnGoingTodos }}</span
+      >
       of {{ appStore.getTotalTodos }} left
     </p>
     <div></div>
