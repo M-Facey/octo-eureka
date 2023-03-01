@@ -37,11 +37,11 @@ const closeEditView = () => {
 };
 
 watch(
-  () => appStore.getTotalCompletedSubtask,
+  () => appStore.getTotalOnGoingSubtask,
   (total) => {
     if (!appStore.selectedTodo) return;
 
-    if (total === appStore.getTotalSubtasks && appStore.getTotalSubtasks > 0) {
+    if (total === 0 && appStore.getTotalSubtasks > 0) {
       appStore.selectedTodo.isCompleted = true;
       notifyStore.addNotification(
         "success",

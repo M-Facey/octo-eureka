@@ -59,9 +59,9 @@ export const useAppStore = defineStore({
       if (!this.selectedTodo) return 0;
       return this.selectedTodo.subtasks.length;
     },
-    getTotalCompletedSubtask(): number {
+    getTotalOnGoingSubtask(): number {
       if (!this.selectedTodo) return 0;
-      return this.selectedTodo.subtasks.filter((todo) => todo.isCompleted)
+      return this.selectedTodo.subtasks.filter((todo) => !todo.isCompleted)
         .length;
     },
   },
