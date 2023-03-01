@@ -60,7 +60,7 @@ defineEmits<{
           button-label="Clear Todo Input"
           button-size="xs"
           :is-icon-button="true"
-          @trigger-event="$emit('clearTodoInput')"
+          @trigger-event="$emit('update:modelValue', '')"
         >
           <icon-close class="w-4" />
         </todo-button>

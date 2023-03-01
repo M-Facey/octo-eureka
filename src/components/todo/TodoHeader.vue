@@ -29,13 +29,11 @@ const addNewTodo = () => {
     id: nanoid(),
     name: newTodo.value,
     isCompleted: false,
+    description: "",
+    subtasks: [],
     createdAt: new Date(),
   });
 
-  clearTodoInput();
-};
-
-const clearTodoInput = () => {
   newTodo.value = "";
 };
 
@@ -63,7 +61,6 @@ const setTheme = () => {
       :is-optional="false"
       class="flex-grow"
       @trigger-event-on-enter="addNewTodo"
-      @clear-todo-input="clearTodoInput"
     />
     <todo-button
       button-label="Add Todo"
