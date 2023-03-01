@@ -1,16 +1,18 @@
 // Vitest Snapshot v1
 
 exports[`Todo Item Component > should render 1`] = `
-"<div data-v-549d9e09=\\"\\" class=\\"card group flex items-center border border-neutral-800 hover:border-transparent hover:bg-black mx-3 p-3 rounded-lg\\"><label data-v-549d9e09=\\"\\" for=\\"taskCheck\\" class=\\"relative w-6 h-6 flex items-center justify-center text-white border border-neutral-500 rounded\\"><input data-v-549d9e09=\\"\\" id=\\"1\\" type=\\"checkbox\\" class=\\"absolute w-full h-full opacity-0 peer\\"><svg data-v-549d9e09=\\"\\" xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" class=\\"feather feather-check w-4 opacity-0 peer-checked:opacity-100\\">
+"<div data-v-549d9e09=\\"\\" class=\\"w-full group flex items-center border border-neutral-800 hover:border-transparent hover:bg-black p-3 rounded-lg\\"><label data-v-549d9e09=\\"\\" for=\\"taskCheck\\" class=\\"relative w-6 h-6 flex items-center justify-center text-white border border-neutral-500 rounded\\"><input data-v-549d9e09=\\"\\" id=\\"1\\" type=\\"checkbox\\" class=\\"absolute w-full h-full opacity-0 peer\\"><svg data-v-549d9e09=\\"\\" xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" class=\\"feather feather-check w-4 opacity-0 peer-checked:opacity-100\\">
       <polyline points=\\"20 6 9 17 4 12\\"></polyline>
     </svg></label>
   <p data-v-549d9e09=\\"\\" class=\\"font-bold tracking-wide ml-2 mr-auto completed text-neutral-500\\">Simple Task</p>
-  <div data-v-549d9e09=\\"\\" class=\\"flex gap-x-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity\\"><button data-v-549d9e09=\\"\\" aria-label=\\"Delete Todo\\" class=\\"group/btn relative text-neutral-300 border border-transparent focus:border-neutral-500 rounded flex gap-1 p-2 bg-neutral-800 hover:bg-neutral-700\\"><svg data-v-549d9e09=\\"\\" xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" class=\\"feather feather-x w-5\\">
+  <div data-v-549d9e09=\\"\\" class=\\"flex gap-x-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity\\">
+    <!--v-if--><button data-v-549d9e09=\\"\\" aria-label=\\"Delete Todo\\" class=\\"group/btn relative text-neutral-300 border border-transparent focus:border-neutral-500 rounded flex gap-1 p-2 bg-neutral-800 hover:bg-neutral-700\\"><svg data-v-549d9e09=\\"\\" xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" class=\\"feather feather-x w-5\\">
         <line x1=\\"18\\" y1=\\"6\\" x2=\\"6\\" y2=\\"18\\"></line>
         <line x1=\\"6\\" y1=\\"6\\" x2=\\"18\\" y2=\\"18\\"></line>
       </svg>
       <!--v-if-->
       <!--v-if-->
-    </button></div>
+    </button>
+  </div>
 </div>"
 `;
