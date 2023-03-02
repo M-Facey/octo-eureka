@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { usePreferredColorScheme, onClickOutside } from "@vueuse/core";
 import { nanoid } from "nanoid";
 
 import TodoInput from "./TodoInput.vue";
@@ -37,19 +38,36 @@ const addNewTodo = () => {
   newTodo.value = "";
 };
 
+const filterModal = ref<HTMLElement | null>(null);
+const sortModal = ref<HTMLElement | null>(null);
+
 const setTheme = () => {
+  const preferredColorScheme = usePreferredColorScheme();
   const { getNextTheme, changeToNextTheme } = themeStore;
   changeToNextTheme();
 
-  if (getNextTheme === "light") {
+  if (getNextTheme === "light" || preferredColorScheme.value === "light") {
     document.documentElement.classList.remove("dark");
-  } else if (
-    getNextTheme === "dark" ||
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  ) {
+  } else {
     document.documentElement.classList.add("dark");
   }
 };
+
+onMounted(() => {
+  onClickOutside(filterModal, (event) => {
+    const element = event.target as HTMLButtonElement;
+    if (element.id === "filter-todo") return;
+
+    appStore.setShowModal("");
+  });
+
+  onClickOutside(sortModal, (event) => {
+    const element = event.target as HTMLButtonElement;
+    if (element.id === "sort-todo") return;
+
+    appStore.setShowModal("");
+  });
+});
 </script>
 
 <template>
@@ -63,6 +81,7 @@ const setTheme = () => {
       @trigger-event-on-enter="addNewTodo"
     />
     <todo-button
+      button-id="add-todo"
       button-label="Add Todo"
       button-size="sm"
       :show-label="true"
@@ -73,44 +92,46 @@ const setTheme = () => {
       <icon-add class="w-5" />
     </todo-button>
 
+    <div class="relative">
+      <todo-button
+        button-id="filter-todo"
+        button-label="Filter Todos"
+        button-size="sm"
+        tooltip="Filter"
+        @trigger-event="appStore.setShowModal('filter')"
+      >
+        <icon-filter class="w-5 pointer-events-none" />
+      </todo-button>
+      <transition name="todo-fade">
+        <filter-modal
+          v-if="appStore.showModal === 'filter'"
+          ref="filterModal"
+          class="absolute z-10"
+        />
+      </transition>
+    </div>
+
+    <div class="relative">
+      <todo-button
+        button-id="sort-todo"
+        button-label="Sort Todos"
+        button-size="sm"
+        tooltip="Sort"
+        @trigger-event="appStore.setShowModal('sortBy')"
+      >
+        <icon-sort class="w-5 h-[1.20rem] mt-[3px] pointer-events-none" />
+      </todo-button>
+      <transition name="todo-fade">
+        <sort-modal
+          v-if="appStore.showModal === 'sortBy'"
+          ref="sortModal"
+          class="absolute z-10"
+          @click.stop
+        />
+      </transition>
+    </div>
     <todo-button
-      button-label="Filter Todos"
-      button-size="sm"
-      tooltip="Filter"
-      @trigger-event="appStore.setShowModal('filter')"
-    >
-      <div class="relative">
-        <icon-filter class="w-5" />
-        <transition name="todo-fade">
-          <filter-modal
-            v-if="appStore.showModal === 'filter'"
-            class="absolute z-10"
-            @click.stop
-          />
-        </transition>
-      </div>
-    </todo-button>
-    <todo-button button-label="Change Layout" button-size="sm">
-      <icon-grid class="w-5" />
-    </todo-button>
-    <todo-button
-      button-label="Sort Todos"
-      button-size="sm"
-      tooltip="Sort"
-      @trigger-event="appStore.setShowModal('sortBy')"
-    >
-      <div class="relative">
-        <icon-sort class="w-5 h-[1.20rem] mt-[3px]" />
-        <transition name="todo-fade">
-          <sort-modal
-            v-if="appStore.showModal === 'sortBy'"
-            class="absolute z-10"
-            @click.stop
-          />
-        </transition>
-      </div>
-    </todo-button>
-    <todo-button
+      button-id="change-theme"
       button-label="Change Theme"
       button-size="sm"
       tooltip="Theme"
@@ -122,15 +143,3 @@ const setTheme = () => {
     </todo-button>
   </div>
 </template>
-
-<style scoped>
-.todo-fade-enter-active,
-.todo-fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.todo-fade-enter-from,
-.todo-fade-leave-to {
-  opacity: 0;
-}
-</style>
