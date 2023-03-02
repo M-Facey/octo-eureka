@@ -47,7 +47,8 @@ const undoDeleteAction = () => {
 
     <todo-button
       v-if="canUndo"
-      button-label="Undo"
+      button-id="undo-deleted-todos"
+      button-label="Undo Delete Todos"
       button-size="sm"
       class="ml-4"
       @trigger-event="undoDeleteAction"
@@ -56,6 +57,7 @@ const undoDeleteAction = () => {
     </todo-button>
 
     <todo-button
+      button-id="close-notification"
       button-label="Close Notification"
       button-size="sm"
       @trigger-event="notifyStore.closeNotification(currentNotification, true)"

@@ -55,13 +55,15 @@ defineEmits<{
     >
       <todo-button
         v-if="canEdit"
-        button-label="Delete Todo"
+        button-id="edit-todo"
+        button-label="Edit Todo"
         button-size="sm"
         @trigger-event="$emit('editTodo', todoId)"
       >
         <icon-edit class="w-5" />
       </todo-button>
       <todo-button
+        button-id="delete-todo"
         button-label="Delete Todo"
         button-size="sm"
         @trigger-event="$emit('deleteTodo', todoId)"

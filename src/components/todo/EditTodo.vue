@@ -59,6 +59,7 @@ watch(
         Todo: {{ appStore.selectedTodo.name }}
       </h2>
       <todo-button
+        button-id="close-edit-view"
         button-label="Close"
         button-size="sm"
         :show-label="false"
@@ -88,6 +89,7 @@ watch(
         @trigger-event-on-enter="addSubtask()"
       />
       <todo-button
+        button-id="add-subtask"
         button-label="Add Subtask"
         button-size="sm"
         :show-label="false"
