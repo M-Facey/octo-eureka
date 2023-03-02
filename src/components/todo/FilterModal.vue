@@ -32,7 +32,7 @@ const changeStatus = (status: string) => {
 
 <template>
   <div
-    class="absolute top-full -right-3 translate-y-5 flex flex-col gap-1 bg-neutral-300 dark:bg-neutral-800 border border-neutral-700 dark:border-neutral-700/70 p-2 cursor-default rounded-lg"
+    class="absolute top-full -right-3 translate-y-3 flex flex-col gap-1 bg-neutral-300 dark:bg-neutral-800 border border-neutral-700 dark:border-neutral-700/70 p-2 cursor-default rounded-lg"
   >
     <div v-for="status in statuses" class="flex items-center gap-x-2">
       <label
@@ -53,8 +53,10 @@ const changeStatus = (status: string) => {
       <p
         class="cursor-pointer"
         :class="{
-          'text-neutral-600 hover:text-neutral-400':
+          'text-neutral-500 hover:text-neutral-400':
             status.value !== appStore.viewingStatus,
+          'font-bold text-neutral-900 dark:text-neutral-300 ':
+            status.value === appStore.viewingStatus,
         }"
         @click="changeStatus(status.value)"
       >
