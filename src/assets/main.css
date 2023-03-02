@@ -6,3 +6,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Transition styles */
+.todo-fade-enter-active,
+.todo-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.todo-fade-enter-from,
+.todo-fade-leave-to {
+  opacity: 0;
+}
