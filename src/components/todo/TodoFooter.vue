@@ -7,11 +7,15 @@ import SettingModal from "./SettingModal.vue";
 
 import IconSettings from "../icons/IconSettings.vue";
 
+import useScreenSize from "@/composables/useScreenSize";
+
 import { useAppStore } from "@/stores/app";
 import { useNotifyStore } from "@/stores/notify";
 
 const appStore = useAppStore();
 const notifyStore = useNotifyStore();
+
+const { onMobile, onDesktop } = useScreenSize();
 
 const settingModal = ref<HTMLElement | null>();
 
@@ -42,7 +46,7 @@ onMounted(() => {
       >
       of {{ appStore.getTotalTodos }} left
     </p>
-    <div class="flex gap-2">
+    <div v-if="onDesktop" class="flex gap-2">
       <div class="relative">
         <todo-button
           button-id="open-settings-modal"
@@ -70,6 +74,27 @@ onMounted(() => {
         "
         @trigger-event="appStore.deleteCompletedTodo"
       />
+    </div>
+    <div
+      class="w-max"
+      :class="{
+        'absolute -bottom-7 left-1/2 -translate-x-1/2': onDesktop,
+        'text-white': onMobile,
+      }"
+    >
+      <a
+        target="_blank"
+        href="https://icons8.com/icon/w0JUG294E8rU/todo-list"
+        class="text-neutral-600 hover:text-neutral-900 font-bold"
+        >Todo List</a
+      >
+      icon by
+      <a
+        target="_blank"
+        href="https://icons8.com"
+        class="text-neutral-600 hover:text-neutral-900 font-bold"
+        >Icons8</a
+      >
     </div>
   </div>
 </template>
