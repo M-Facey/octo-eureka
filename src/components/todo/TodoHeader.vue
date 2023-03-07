@@ -10,17 +10,20 @@ import SortModal from "./SortModal.vue";
 
 import IconAdd from "../icons/IconAdd.vue";
 import IconFilter from "../icons/IconFilter.vue";
-import IconGrid from "../icons/IconGrid.vue";
 import IconSort from "../icons/IconSort.vue";
 import IconSun from "../icons/IconSun.vue";
 import IconMoon from "../icons/IconMoon.vue";
 import IconSystem from "../icons/IconSystem.vue";
+
+import useScreenSize from "@/composables/useScreenSize";
 
 import { useAppStore } from "@/stores/app";
 import { useThemeStore } from "@/stores/theme";
 
 const appStore = useAppStore();
 const themeStore = useThemeStore();
+
+const { onDesktop } = useScreenSize();
 
 const newTodo = ref("");
 const addNewTodo = () => {
@@ -130,16 +133,23 @@ onMounted(() => {
         />
       </transition>
     </div>
-    <todo-button
-      button-id="change-theme"
-      button-label="Change Theme"
-      button-size="sm"
-      tooltip="Theme"
-      @trigger-event="setTheme()"
-    >
-      <icon-sun v-show="themeStore.getTheme === 'light'" class="w-[1.20rem]" />
-      <icon-moon v-show="themeStore.getTheme === 'dark'" class="w-5" />
-      <icon-system v-show="themeStore.getTheme === 'system'" class="w-5" />
-    </todo-button>
+
+    <teleport to="#app" :disabled="onDesktop">
+      <todo-button
+        button-id="change-theme"
+        button-label="Change Theme"
+        button-size="sm"
+        tooltip="Theme"
+        :is-theme-button="true"
+        @trigger-event="setTheme()"
+      >
+        <icon-sun
+          v-show="themeStore.getTheme === 'light'"
+          class="w-[1.20rem]"
+        />
+        <icon-moon v-show="themeStore.getTheme === 'dark'" class="w-5" />
+        <icon-system v-show="themeStore.getTheme === 'system'" class="w-5" />
+      </todo-button>
+    </teleport>
   </div>
 </template>
