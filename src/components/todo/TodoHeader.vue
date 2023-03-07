@@ -14,6 +14,7 @@ import IconSort from "../icons/IconSort.vue";
 import IconSun from "../icons/IconSun.vue";
 import IconMoon from "../icons/IconMoon.vue";
 import IconSystem from "../icons/IconSystem.vue";
+import IconSettings from "../icons/IconSettings.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 
@@ -23,7 +24,7 @@ import { useThemeStore } from "@/stores/theme";
 const appStore = useAppStore();
 const themeStore = useThemeStore();
 
-const { onDesktop } = useScreenSize();
+const { onDesktop, onMobileMd, betweenMobileSmAndMd } = useScreenSize();
 
 const newTodo = ref("");
 const addNewTodo = () => {
@@ -74,64 +75,87 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex gap-3 p-4">
-    <todo-input
-      type="text"
-      placeholder="Enter new todo here..."
-      v-model="newTodo"
-      :is-optional="false"
-      class="flex-grow"
-      @trigger-event-on-enter="addNewTodo"
-    />
-    <todo-button
-      button-id="add-todo"
-      button-label="Add Todo"
-      button-size="sm"
-      :show-label="true"
-      :is-disabled="!newTodo"
-      class="ml-auto"
-      @trigger-event="addNewTodo"
-    >
-      <icon-add class="w-5" />
-    </todo-button>
-
-    <div class="relative">
+  <div
+    class="flex gap-3 p-4"
+    :class="{ 'flex-col': onMobileMd, 'flex-row': onDesktop }"
+  >
+    <div class="flex flex-grow gap-3">
+      <todo-input
+        type="text"
+        placeholder="Enter new todo here..."
+        v-model="newTodo"
+        :is-optional="false"
+        class="flex-grow"
+        @trigger-event-on-enter="addNewTodo"
+      />
       <todo-button
-        button-id="filter-todo"
-        button-label="Filter Todos"
+        button-id="add-todo"
+        button-label="Add Todo"
         button-size="sm"
-        tooltip="Filter"
-        @trigger-event="appStore.setShowModal('filter')"
+        :show-label="!onMobileMd"
+        :is-disabled="!newTodo"
+        class="ml-auto"
+        @trigger-event="addNewTodo"
       >
-        <icon-filter class="w-5 pointer-events-none" />
+        <icon-add class="w-5" />
       </todo-button>
-      <transition name="todo-fade">
-        <filter-modal
-          v-if="appStore.showModal === 'filter'"
-          ref="filterModal"
-          class="absolute z-10"
-        />
-      </transition>
     </div>
 
-    <div class="relative">
+    <div class="flex gap-3">
+      <div class="relative" :class="{ 'w-1/3': onMobileMd }">
+        <todo-button
+          button-id="filter-todo"
+          button-label="Filter"
+          button-size="sm"
+          tooltip="Filter"
+          :show-label="betweenMobileSmAndMd"
+          :class="{ 'w-full justify-center': onMobileMd }"
+          @trigger-event="appStore.setShowModal('filter')"
+        >
+          <icon-filter class="w-5 pointer-events-none" />
+        </todo-button>
+        <transition name="todo-fade">
+          <filter-modal
+            v-if="appStore.showModal === 'filter'"
+            ref="filterModal"
+            class="absolute z-10"
+          />
+        </transition>
+      </div>
+
+      <div class="relative" :class="{ 'w-1/3': onMobileMd }">
+        <todo-button
+          button-id="sort-todo"
+          button-label="Sort"
+          button-size="sm"
+          tooltip="Sort"
+          :show-label="betweenMobileSmAndMd"
+          :class="{ 'w-full justify-center': onMobileMd }"
+          @trigger-event="appStore.setShowModal('sortBy')"
+        >
+          <icon-sort class="w-5 h-[1.20rem] mt-[3px] pointer-events-none" />
+        </todo-button>
+        <transition name="todo-fade">
+          <sort-modal
+            v-if="appStore.showModal === 'sortBy'"
+            ref="sortModal"
+            class="absolute z-10"
+            @click.stop
+          />
+        </transition>
+      </div>
+
       <todo-button
-        button-id="sort-todo"
-        button-label="Sort Todos"
+        v-if="onMobileMd"
+        button-id="settings"
+        button-label="Settings"
         button-size="sm"
-        tooltip="Sort"
-        @trigger-event="appStore.setShowModal('sortBy')"
+        tooltip="Settings"
+        :show-label="betweenMobileSmAndMd"
+        :class="{ 'w-1/3 justify-center': onMobileMd }"
       >
-        <icon-sort class="w-5 h-[1.20rem] mt-[3px] pointer-events-none" />
+        <icon-settings class="w-5 pointer-events-none" />
       </todo-button>
-      <transition name="todo-fade">
-        <sort-modal
-          v-if="appStore.showModal === 'sortBy'"
-          ref="sortModal"
-          class="absolute z-10"
-          @click.stop
-        />
-      </transition>
     </div>
 
     <teleport to="#app" :disabled="onDesktop">
