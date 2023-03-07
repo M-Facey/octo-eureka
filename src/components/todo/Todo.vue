@@ -3,11 +3,19 @@ import TodoHeader from "./TodoHeader.vue";
 import TodoList from "./TodoList.vue";
 import TodoFooter from "./TodoFooter.vue";
 import TodoNotificationList from "./TodoNotificationList.vue";
+import useScreenSize from "@/composables/useScreenSize";
+
+const { onDesktop, onMobile } = useScreenSize();
 </script>
 
 <template>
   <div
-    class="absolute top-[58%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-full max-w-[700px] flex flex-col bg-neutral-200 dark:bg-neutral-900 rounded-lg"
+    class="absolute w-full max-w-[700px] flex flex-col bg-neutral-200 dark:bg-neutral-900"
+    :class="{
+      'top-[58%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] rounded-lg':
+        onDesktop,
+      'bottom-0 h-[70vh] rounded-t-lg': onMobile,
+    }"
   >
     <todo-header />
     <todo-list />
