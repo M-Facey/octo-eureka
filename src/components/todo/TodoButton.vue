@@ -42,7 +42,7 @@ defineEmits<{ (e: "triggerEvent"): void }>();
     @click.stop="$emit('triggerEvent')"
   >
     <slot />
-    <p v-if="showLabel">
+    <p v-if="showLabel" class="w-max">
       {{ buttonLabel }}
     </p>
 
