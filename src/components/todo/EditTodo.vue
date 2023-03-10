@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { nanoid } from "nanoid";
 
 import TodoInput from "./TodoInput.vue";
@@ -9,11 +9,15 @@ import TodoItem from "./TodoItem.vue";
 import IconAdd from "../icons/IconAdd.vue";
 import IconClose from "../icons/IconClose.vue";
 
+import useScreenSize from "@/composables/useScreenSize";
+
 import { useAppStore } from "@/stores/app";
 import { useNotifyStore } from "@/stores/notify";
 
 const appStore = useAppStore();
 const notifyStore = useNotifyStore();
+
+const { onMobile } = useScreenSize();
 
 const subtaskInput = ref("");
 
@@ -36,6 +40,11 @@ const closeEditView = () => {
   appStore.selectedTodo = undefined;
 };
 
+const viewSection = ref("");
+const changeView = (sectionName: string) => {
+  viewSection.value = sectionName;
+};
+
 watch(
   () => appStore.getTotalOnGoingSubtask,
   (total) => {
@@ -53,7 +62,14 @@ watch(
 </script>
 
 <template>
-  <div v-if="appStore.selectedTodo" class="flex flex-col w-1/3 h-full mx-3">
+  <div
+    v-if="appStore.selectedTodo"
+    class="flex flex-col h-full"
+    :class="{
+      'w-1/3 mx-3': !onMobile,
+      'absolute w-full bg-neutral-900': onMobile,
+    }"
+  >
     <div class="flex items-center justify-between">
       <h2 class="text-xl text-neutral-900 dark:text-white font-bold">
         Todo: {{ appStore.selectedTodo.name }}
@@ -69,8 +85,29 @@ watch(
       </todo-button>
     </div>
 
-    <div class="flex-shrink-0">
+    <div v-if="onMobile" class="flex gap-2 my-2">
+      <button
+        class="relative w-1/2 bg-neutral-800 text-white uppercase tracking-widest px-4 py-2 rounded"
+        :class="{ active: viewSection === 'description' }"
+        @click="changeView('description')"
+      >
+        Description
+      </button>
+      <button
+        class="relative w-1/2 bg-neutral-800 text-white uppercase tracking-widest px-4 py-2 rounded"
+        :class="{ active: viewSection === 'subtasks' }"
+        @click="changeView('subtasks')"
+      >
+        Subtasks
+      </button>
+    </div>
+
+    <div
+      v-if="!onMobile || viewSection === 'description'"
+      class="flex-shrink-0"
+    >
       <label
+        v-if="!onMobile"
         class="text-neutral-600 dark:text-neutral-400 text-sm tracking-wide"
         >Description</label
       >
@@ -81,44 +118,50 @@ watch(
       ></textarea>
     </div>
 
-    <div class="flex gap-x-2 mt-2">
-      <todo-input
-        type="text"
-        placeholder="Enter Subtask"
-        v-model="subtaskInput"
-        @trigger-event-on-enter="addSubtask()"
-      />
-      <todo-button
-        button-id="add-subtask"
-        button-label="Add Subtask"
-        button-size="sm"
-        :show-label="false"
-        @trigger-event="addSubtask()"
-      >
-        <icon-add class="w-6" />
-      </todo-button>
-    </div>
-
-    <transition-group
-      v-if="appStore.selectedTodo.subtasks.length"
-      name="todo-list"
-      tag="div"
-      class="relative flex flex-grow flex-col gap-y-3 my-3 overflow-y-auto"
+    <div
+      v-if="!onMobile || viewSection === 'subtasks'"
+      class="flex flex-col flex-grow overflow-hidden"
     >
-      <todo-item
-        v-for="{ id, name, isCompleted } in appStore.selectedTodo.subtasks"
-        :key="id"
-        :todo-id="id"
-        :todo-name="name"
-        :is-completed="isCompleted"
-        class="mx-0"
-        @delete-todo="appStore.deleteSubtask(id)"
-        @toggle-completed="appStore.toggleSubtaskIsCompleted(id)"
-      ></todo-item>
-    </transition-group>
-    <p v-else class="text-neutral-900 dark:text-white text-center mt-3">
-      There are no subtasks available
-    </p>
+      <div class="w-full flex gap-x-2 mt-2">
+        <todo-input
+          type="text"
+          placeholder="Enter Subtask"
+          v-model="subtaskInput"
+          class="flex-grow"
+          @trigger-event-on-enter="addSubtask()"
+        />
+        <todo-button
+          button-id="add-subtask"
+          button-label="Add Subtask"
+          button-size="sm"
+          :show-label="false"
+          @trigger-event="addSubtask()"
+        >
+          <icon-add class="w-6" />
+        </todo-button>
+      </div>
+
+      <transition-group
+        v-if="appStore.selectedTodo.subtasks.length"
+        name="todo-list"
+        tag="div"
+        class="relative flex flex-col gap-y-3 my-3 overflow-y-auto"
+      >
+        <todo-item
+          v-for="{ id, name, isCompleted } in appStore.selectedTodo.subtasks"
+          :key="id"
+          :todo-id="id"
+          :todo-name="name"
+          :is-completed="isCompleted"
+          class="mx-0"
+          @delete-todo="appStore.deleteSubtask(id)"
+          @toggle-completed="appStore.toggleSubtaskIsCompleted(id)"
+        ></todo-item>
+      </transition-group>
+      <p v-else class="text-neutral-900 dark:text-white text-center mt-3">
+        There are no subtasks available
+      </p>
+    </div>
   </div>
 </template>
 
@@ -137,5 +180,10 @@ watch(
 
 .todo-list-leave-active {
   position: absolute;
+}
+
+.active::before {
+  content: "";
+  @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-cyan-500 rounded-t;
 }
 </style>
