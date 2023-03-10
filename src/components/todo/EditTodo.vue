@@ -67,7 +67,7 @@ watch(
     class="flex flex-col h-full"
     :class="{
       'w-1/3 mx-3': !onMobile,
-      'absolute w-full bg-neutral-900': onMobile,
+      'absolute w-full bg-neutral-200 dark:bg-neutral-900': onMobile,
     }"
   >
     <div class="flex items-center justify-between">
@@ -87,14 +87,14 @@ watch(
 
     <div v-if="onMobile" class="flex gap-2 my-2">
       <button
-        class="relative w-1/2 bg-neutral-800 text-white uppercase tracking-widest px-4 py-2 rounded"
+        class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white uppercase tracking-widest px-4 py-2 rounded"
         :class="{ active: viewSection === 'description' }"
         @click="changeView('description')"
       >
         Description
       </button>
       <button
-        class="relative w-1/2 bg-neutral-800 text-white uppercase tracking-widest px-4 py-2 rounded"
+        class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white uppercase tracking-widest px-4 py-2 rounded"
         :class="{ active: viewSection === 'subtasks' }"
         @click="changeView('subtasks')"
       >
@@ -127,7 +127,7 @@ watch(
           type="text"
           placeholder="Enter Subtask"
           v-model="subtaskInput"
-          class="flex-grow"
+          class="flex-grow ml-1"
           @trigger-event-on-enter="addSubtask()"
         />
         <todo-button
