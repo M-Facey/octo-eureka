@@ -5,6 +5,8 @@ import IconCheck from "../icons/IconCheck.vue";
 import IconEdit from "../icons/IconEdit.vue";
 import IconClose from "../icons/IconClose.vue";
 
+import useScreenSize from "@/composables/useScreenSize";
+
 export interface Prop {
   todoId: string;
   todoName: string;
@@ -15,11 +17,14 @@ export interface Prop {
 withDefaults(defineProps<Prop>(), {
   canEdit: false,
 });
+
 defineEmits<{
   (e: "toggleCompleted"): void;
   (e: "editTodo", id: string): void;
   (e: "deleteTodo", id: string): void;
 }>();
+
+const { onMobile } = useScreenSize();
 </script>
 
 <template>
@@ -51,7 +56,8 @@ defineEmits<{
     </p>
 
     <div
-      class="flex gap-x-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+      class="flex gap-x-3 ml-auto transition-opacity"
+      :class="{'opacity-0 group-hover:opacity-100' : !onMobile}"
     >
       <todo-button
         v-if="canEdit"
