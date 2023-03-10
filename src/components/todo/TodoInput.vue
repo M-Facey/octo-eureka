@@ -43,9 +43,7 @@ defineEmits<{
       @keypress.enter="$emit('triggerEventOnEnter')"
     />
 
-    <div
-      class="absolute top-1/2 right-1.5 -translate-y-1/2 flex gap-2 mb-[3px]"
-    >
+    <div class="absolute top-1/2 right-2 -translate-y-1/2 flex gap-2 mb-[3px]">
       <transition name="fade">
         <todo-button
           button-id="search-todos"
