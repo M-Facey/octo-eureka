@@ -11,12 +11,12 @@ const appStore = useAppStore();
 <template>
   <div
     v-if="appStore.getTodosByStatus.length"
-    class="relative flex flex-grow overflow-hidden"
+    class="relative flex flex-grow overflow-hidden mx-4"
   >
     <transition-group
       name="todo-list"
       tag="div"
-      class="relative flex flex-grow flex-col gap-y-3 mx-4 overflow-x-hidden overflow-y-auto"
+      class="relative flex flex-grow flex-col gap-y-3 overflow-x-hidden overflow-y-auto"
     >
       <todo-item
         v-for="todo in appStore.getTodosByStatus"
