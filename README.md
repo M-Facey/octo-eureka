@@ -7,7 +7,7 @@ This is a simple todo application created in Vue3 and TailwindCSS.
 ## Features
 :warning: **Please Note**: The feature list will be updated as features are merged into the main branch.
 
-### Basic Features:
+### Basic Features
 - [x] `ADD`, `DELETE`, `EDIT`, & `COMPLETE` todo(s)
 - [ ] Mobile Friendly
     - [ ] Re-work the edit section
@@ -23,6 +23,10 @@ This is a simple todo application created in Vue3 and TailwindCSS.
     - Number of unit tests: 3
     - Number of e2e tests: 0
 - [ ] Clear todos after 24hrs
+
+### Chores
+- [ ] Re-structure project
+- [ ] Replace banner on `README.md`
 
 ## Project Setup
 
