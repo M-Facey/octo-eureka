@@ -5,21 +5,24 @@
 This is a simple todo application created in Vue3 and TailwindCSS.
 
 ## Features
+:warning: **Please Note**: The feature list will be updated as features are merged into the main branch.
 
-| Features                     | QA / Tested | Done                                     | In progress                                   |
-| ---------------------------- | ----------- | ---------------------------------------- | --------------------------------------------- |
-| Add Todo                     |             | <p align="center">:white_check_mark:</p> |                                               |
-| Delete Todo                  |             | <p align="center">:white_check_mark:</p> |                                               |
-| Complete Todo                |             | <p align="center">:white_check_mark:</p> |                                               |
-| Filter Todo                  |             | <p align="center">:white_check_mark:</p> |                                               |
-| Sort Todo                    |             | <p align="center">:white_check_mark:</p> |                                               |
-| Setup Unit Test              |             | <p align="center">:white_check_mark:</p> |                                               |
-| Setup E2E Test               |             | <p align="center">:white_check_mark:</p> |                                               |
-| Add Animations for todo list |             | <p align="center">:white_check_mark:</p> |                                               |
-| Limit No. of Todos           |             | <p align="center">:white_check_mark:</p> |                                               |
-| Clear todos after 24hrs      |             |                                          | <p align="center">:white_check_mark:</center> |
+### Basic Features:
+    - [x] `ADD`, `DELETE`, `EDIT`, & `COMPLETE` todo(s)
+    - [ ] Mobile Friendly
+        - [ ] Re-work the edit section
+        - [ ] Move notification to top of screen for mobile
+        - [ ] Rework modals
+    - [ ] Increased Accessability
+        - [ ] High Contrast Mode
+        - [ ] Styling for `prefers-reduced-motion`  
 
-:warning: **Please Note**: Since most of the features have been implemented, the format in which those completed features are displayed will be changed on the next readme update.
+### Extra Features
+    - [x] `FILTER`, `LIMIT (MAX 50)` & `SORT` todo(s)
+    - [ ] Added tests
+        - Number of unit tests: 3
+        - Number of e2e tests: 0
+    - [ ] Clear todos after 24hrs
 
 ## Project Setup
 
