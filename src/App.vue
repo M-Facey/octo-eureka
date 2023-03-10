@@ -34,7 +34,7 @@ watch(
 </script>
 
 <template>
-  <main class="h-screen bg-neutral-400 overflow-hidden">
+  <main class="relative h-screen bg-neutral-400 overflow-hidden">
     <the-header />
     <todo />
   </main>
