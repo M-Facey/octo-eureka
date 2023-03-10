@@ -50,7 +50,7 @@ const setTheme = () => {
   const { getNextTheme, changeToNextTheme } = themeStore;
   changeToNextTheme();
 
-  if (getNextTheme === "light" && preferredColorScheme.value === "light") {
+  if (getNextTheme === "light" || preferredColorScheme.value === "light") {
     document.documentElement.classList.remove("dark");
   } else {
     document.documentElement.classList.add("dark");

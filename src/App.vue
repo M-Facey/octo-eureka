@@ -10,7 +10,7 @@ const preferredColorScheme = usePreferredColorScheme();
 
 onMounted(() => {
   if (
-    themeStore.getTheme === "light" &&
+    themeStore.getTheme === "light" ||
     preferredColorScheme.value === "light"
   ) {
     document.documentElement.classList.remove("dark");
