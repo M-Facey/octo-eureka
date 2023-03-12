@@ -13,7 +13,7 @@ This is a simple todo application created in Vue3 and TailwindCSS.
 - [x] `ADD`, `DELETE`, `EDIT`, & `COMPLETE` todo(s)
 - [ ] Mobile Friendly
   - [x] Re-work the edit section
-  - [ ] Move notification to top of screen for mobile
+  - [x] Move notification to top of screen for mobile
   - [ ] Rework modals
 - [ ] Increased Accessability
   - [ ] High Contrast Mode
