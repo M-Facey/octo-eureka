@@ -7,6 +7,8 @@ import TodoButton from "./TodoButton.vue";
 import IconClose from "../icons/IconClose.vue";
 import IconUndo from "../icons/IconUndo.vue";
 
+import useScreenSize from "@/composables/useScreenSize";
+
 export interface Props {
   id: string;
   type: string;
@@ -20,6 +22,8 @@ const prop = withDefaults(defineProps<Props>(), {
 
 const appStore = useAppStore();
 const notifyStore = useNotifyStore();
+
+const { onMobile } = useScreenSize();
 
 const hasErrorType = computed(
   () => prop.type === "delete" || prop.type === "limit"
@@ -41,6 +45,8 @@ const undoDeleteAction = () => {
     :class="{
       'bg-green-500/50 border-green-500': type === 'success',
       'bg-red-600/40 border-red-700': hasErrorType,
+      'notify-up': !onMobile,
+      'notify-down': onMobile,
     }"
   >
     <p class="">{{ detail }}</p>
@@ -68,14 +74,14 @@ const undoDeleteAction = () => {
 </template>
 
 <style scoped>
-.notify {
+.notify-up {
   position: relative;
   top: 0;
   transform: translateY(20px);
-  animation: fade-in ease-in 250ms forwards;
+  animation: fade-in-up ease-in 250ms forwards;
 }
 
-@keyframes fade-in {
+@keyframes fade-in-up {
   0% {
     transform: translateY(20px);
     opacity: 0;
@@ -83,6 +89,25 @@ const undoDeleteAction = () => {
 
   100% {
     transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.notify-down {
+  position: relative;
+  top: 0;
+  transform: translateY(0px);
+  animation: fade-in-drop ease-in 250ms forwards;
+}
+
+@keyframes fade-in-drop {
+  0% {
+    transform: translateY(0px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(20px);
     opacity: 1;
   }
 }
