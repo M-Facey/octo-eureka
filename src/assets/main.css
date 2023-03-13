@@ -7,6 +7,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Removed all animation for sites */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}
+
 /* Transition styles */
 .todo-fade-enter-active,
 .todo-fade-leave-active {

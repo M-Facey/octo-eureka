@@ -17,7 +17,7 @@ This is a simple todo application created in Vue3 and TailwindCSS.
   - [ ] Rework modals
 - [ ] Increased Accessability
   - [ ] High Contrast Mode
-  - [ ] Styling for `prefers-reduced-motion`
+  - [x] Styling for `prefers-reduced-motion`
 
 ### Extra Features
 
