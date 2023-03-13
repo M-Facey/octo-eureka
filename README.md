@@ -24,7 +24,7 @@ This is a simple todo application created in Vue3 and TailwindCSS.
 - [x] `FILTER`, `LIMIT (MAX 50)` & `SORT` todo(s)
 - [ ] Added tests
   - Number of unit tests: 3
-  - Number of e2e tests: 0
+  - Number of e2e tests: 7
 - [ ] Clear todos after 24hrs
 
 ### Chores
