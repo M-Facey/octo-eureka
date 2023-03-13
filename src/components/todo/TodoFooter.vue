@@ -41,10 +41,13 @@ onMounted(() => {
 <template>
   <div class="flex items-center justify-between px-4 py-3">
     <p class="text-neutral-400 dark:text-neutral-600 font-medium">
-      <span class="text-neutral-900 dark:text-white">
+      <span
+        class="text-neutral-900 dark:text-white"
+        data-cy="totalOngoingTodos"
+      >
         {{ appStore.getTotalOnGoingTodos }}</span
       >
-      of {{ appStore.getTotalTodos }} left
+      of <span data-cy="totalTodos"> {{ appStore.getTotalTodos }}</span> left
     </p>
     <div v-if="onDesktop" class="flex gap-2">
       <div class="relative">

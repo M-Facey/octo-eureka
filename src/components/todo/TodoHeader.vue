@@ -98,7 +98,7 @@ onMounted(() => {
         :show-label="!onMobileMd"
         :is-disabled="!newTodo"
         class="ml-auto"
-        data-cy="addTodoBtn"
+        data-cy="addTodo"
         @trigger-event="addNewTodo"
       >
         <icon-add class="w-5" />
