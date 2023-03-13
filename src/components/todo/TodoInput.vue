@@ -11,6 +11,9 @@ export interface Prop {
   isOptional?: boolean;
   hasClearButton?: boolean;
   hasSearchButton?: boolean;
+  inputDataCy: string;
+  clearDataCy: string;
+  searchDataCy: string;
 }
 
 withDefaults(defineProps<Prop>(), {
@@ -37,6 +40,7 @@ defineEmits<{
       :placeholder="placeholder"
       :value="modelValue"
       class="w-full h-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 px-3 py-2 outline-none rounded-md"
+      :dataCy="inputDataCy"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
@@ -46,10 +50,11 @@ defineEmits<{
     <div class="absolute top-1/2 right-2 -translate-y-1/2 flex gap-2 mb-[3px]">
       <transition name="fade">
         <todo-button
-          button-id="search-todos"
           v-if="modelValue.length !== 0 && hasSearchButton"
+          button-id="search-todos"
           button-label="Search Todos"
           button-size="xs"
+          :data-cy="searchDataCy"
           :is-icon-button="true"
         >
           <icon-search class="w-4" />
@@ -57,10 +62,11 @@ defineEmits<{
       </transition>
       <transition name="fade">
         <todo-button
-          button-id="clear-todo-input"
           v-if="modelValue.length !== 0 && hasClearButton"
+          button-id="clear-todo-input"
           button-label="Clear Todo Input"
           button-size="xs"
+          :data-cy="clearDataCy"
           :is-icon-button="true"
           @trigger-event="$emit('update:modelValue', '')"
         >

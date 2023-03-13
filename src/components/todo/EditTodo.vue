@@ -79,6 +79,7 @@ watch(
         button-label="Close"
         button-size="sm"
         :show-label="false"
+        data-cy="closeEditTodo"
         @trigger-event="closeEditView()"
       >
         <icon-close class="w-5" />
@@ -89,6 +90,7 @@ watch(
       <button
         class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white uppercase tracking-widest px-4 py-2 rounded"
         :class="{ active: viewSection === 'description' }"
+        data-cy="showDescription"
         @click="changeView('description')"
       >
         Description
@@ -96,6 +98,7 @@ watch(
       <button
         class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white uppercase tracking-widest px-4 py-2 rounded"
         :class="{ active: viewSection === 'subtasks' }"
+        data-cy="showSubtasks"
         @click="changeView('subtasks')"
       >
         Subtasks
@@ -115,6 +118,7 @@ watch(
         v-model="appStore.selectedTodo.description"
         placeholder="Enter description here"
         class="w-full h-32 mt-1.5 bg-neutral-300 dark:bg-neutral-800 border border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-900 dark:text-neutral-300 px-3 py-2 resize-none outline-none rounded"
+        data-cy="todoDescription"
       ></textarea>
     </div>
 
@@ -128,6 +132,9 @@ watch(
           placeholder="Enter Subtask"
           v-model="subtaskInput"
           class="flex-grow ml-1"
+          input-data-cy="subtaskInput"
+          clear-data-cy="clearSubtaskInput"
+          search-data-cy="searchSubtask"
           @trigger-event-on-enter="addSubtask()"
         />
         <todo-button
@@ -135,6 +142,7 @@ watch(
           button-label="Add Subtask"
           button-size="sm"
           :show-label="false"
+          data-cy="addSubtask"
           @trigger-event="addSubtask()"
         >
           <icon-add class="w-6" />
@@ -154,6 +162,7 @@ watch(
           :todo-name="name"
           :is-completed="isCompleted"
           class="mx-0"
+          data-cy="subtask"
           @delete-todo="appStore.deleteSubtask(id)"
           @toggle-completed="appStore.toggleSubtaskIsCompleted(id)"
         ></todo-item>

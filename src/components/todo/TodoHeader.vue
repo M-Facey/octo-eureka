@@ -86,6 +86,9 @@ onMounted(() => {
         v-model="newTodo"
         :is-optional="false"
         class="flex-grow"
+        input-data-cy="todoInput"
+        clear-data-cy="clearTodoInput"
+        search-data-cy="searchTodoInput"
         @trigger-event-on-enter="addNewTodo"
       />
       <todo-button
@@ -95,6 +98,7 @@ onMounted(() => {
         :show-label="!onMobileMd"
         :is-disabled="!newTodo"
         class="ml-auto"
+        data-cy="addTodoBtn"
         @trigger-event="addNewTodo"
       >
         <icon-add class="w-5" />
@@ -110,6 +114,7 @@ onMounted(() => {
           tooltip="Filter"
           :show-label="betweenMobileSmAndMd"
           :class="{ 'w-full justify-center': onMobileMd }"
+          data-cy="openFilterModal"
           @trigger-event="appStore.setShowModal('filter')"
         >
           <icon-filter class="w-5 pointer-events-none" />
@@ -131,6 +136,7 @@ onMounted(() => {
           tooltip="Sort"
           :show-label="betweenMobileSmAndMd"
           :class="{ 'w-full justify-center': onMobileMd }"
+          data-cy="openSortModal"
           @trigger-event="appStore.setShowModal('sortBy')"
         >
           <icon-sort class="w-5 h-[1.20rem] mt-[3px] pointer-events-none" />
@@ -152,6 +158,7 @@ onMounted(() => {
         button-size="sm"
         tooltip="Settings"
         :show-label="betweenMobileSmAndMd"
+        data-cy="openMobileSettingsModal"
         :class="{ 'w-1/3 justify-center': onMobileMd }"
       >
         <icon-settings class="w-5 pointer-events-none" />
@@ -165,6 +172,7 @@ onMounted(() => {
         button-size="sm"
         tooltip="Theme"
         :is-theme-button="true"
+        data-cy="changeTheme"
         @trigger-event="setTheme()"
       >
         <icon-sun

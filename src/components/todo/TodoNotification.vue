@@ -56,6 +56,7 @@ const undoDeleteAction = () => {
       button-id="undo-deleted-todos"
       button-label="Undo Delete Todos"
       button-size="sm"
+      data-cy="undoOperations"
       class="ml-4"
       @trigger-event="undoDeleteAction"
     >
@@ -66,6 +67,7 @@ const undoDeleteAction = () => {
       button-id="close-notification"
       button-label="Close Notification"
       button-size="sm"
+      data-cy="closeNotification"
       @trigger-event="notifyStore.closeNotification(currentNotification, true)"
     >
       <icon-close class="w-5" />

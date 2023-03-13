@@ -37,11 +37,13 @@ const changeSortOrder = (status: string) => {
 <template>
   <div
     class="absolute top-full -right-3 translate-y-3 flex flex-col gap-1 bg-neutral-300 dark:bg-neutral-800 border border-neutral-700/70 p-2 cursor-default rounded-lg"
+    data-cy="sortModal"
   >
     <div v-for="order in sortOrders" class="flex items-center gap-x-2">
       <label
         :for="order.value"
         class="relative w-4 h-4 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 hover:bg-neutral-400/30 dark:hover:bg-neutral-900 cursor-pointer rounded group/sort"
+        :data-cy="order.value"
         @click.stop="changeSortOrder(order.value)"
       >
         <input
@@ -62,6 +64,7 @@ const changeSortOrder = (status: string) => {
           'font-bold text-neutral-900 dark:text-neutral-300 ':
             order.value === appStore.sortBy,
         }"
+        :data-cy="`${order.value}Label`"
         @click="changeSortOrder(order.value)"
       >
         {{ order.displayName }}

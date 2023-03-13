@@ -19,6 +19,7 @@ const nukeIt = () => {
 <template>
   <div
     class="absolute -top-3 -translate-y-full -right-2 w-max p-3 backdrop-blur-sm bg-neutral-100 dark:bg-neutral-800/70 border border-neutral-500/50 dark:border-neutral-700/70 rounded-md"
+    data-cy="settingsModal"
   >
     <div
       class="flex items-center justify-between border-b border-neutral-300 dark:border-neutral-700 pb-2.5 mb-3"
@@ -31,6 +32,7 @@ const nukeIt = () => {
         button-label="Close Settings Modal"
         button-size="xs"
         :is-icon-button="true"
+        data-cy="closeSettingsModal"
         @trigger-event="appStore.setShowModal('')"
       >
         <icon-close class="w-4" />
@@ -43,6 +45,7 @@ const nukeIt = () => {
         button-size="sm"
         :show-label="true"
         :is-icon-button="true"
+        data-cy="clearStorage"
         @trigger-event="nukeIt()"
       >
         <icon-delete class="w-4" />

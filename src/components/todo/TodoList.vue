@@ -25,6 +25,7 @@ const appStore = useAppStore();
         :todo-name="todo.name"
         :is-completed="todo.isCompleted"
         :can-edit="true"
+        data-cy="todo"
         @toggle-completed="appStore.toggleIsCompleted(todo.id)"
         @edit-todo="appStore.setSelectedTodo(todo.id)"
         @delete-todo="appStore.deleteTodo(todo.id)"

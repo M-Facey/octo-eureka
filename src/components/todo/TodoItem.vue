@@ -12,6 +12,7 @@ export interface Prop {
   todoName: string;
   isCompleted: boolean;
   canEdit?: boolean;
+  dataCy: string;
 }
 
 withDefaults(defineProps<Prop>(), {
@@ -30,10 +31,12 @@ const { onMobile } = useScreenSize();
 <template>
   <div
     class="w-full group flex items-center border bg-neutral-300 dark:bg-transparent dark:border-neutral-800 hover:border-transparent hover:bg-neutral-400 dark:hover:bg-black p-3 rounded-lg"
+    :data-cy="dataCy"
   >
     <label
       for="taskCheck"
       class="relative w-6 h-6 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 rounded"
+      data-cy="todoCheck"
       @click="$emit('toggleCompleted')"
     >
       <input
@@ -57,13 +60,14 @@ const { onMobile } = useScreenSize();
 
     <div
       class="flex gap-x-3 ml-auto transition-opacity"
-      :class="{'opacity-0 group-hover:opacity-100' : !onMobile}"
+      :class="{ 'opacity-0 group-hover:opacity-100': !onMobile }"
     >
       <todo-button
         v-if="canEdit"
         button-id="edit-todo"
         button-label="Edit Todo"
         button-size="sm"
+        data-cy="editTodo"
         @trigger-event="$emit('editTodo', todoId)"
       >
         <icon-edit class="w-5" />
@@ -72,6 +76,7 @@ const { onMobile } = useScreenSize();
         button-id="delete-todo"
         button-label="Delete Todo"
         button-size="sm"
+        data-cy="deleteTodo"
         @trigger-event="$emit('deleteTodo', todoId)"
       >
         <icon-close class="w-5" />

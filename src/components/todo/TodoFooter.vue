@@ -53,6 +53,7 @@ onMounted(() => {
           button-label="Settings"
           button-size="sm"
           tooltip="Settings"
+          data-cy="openSettingsModal"
           @trigger-event="appStore.setShowModal('settings')"
         >
           <icon-settings class="w-5 pointer-events-none" />
@@ -72,6 +73,7 @@ onMounted(() => {
         :is-disabled="
           !appStore.hasCompletedTodos || !appStore.getTodosByStatus.length
         "
+        data-cy="clearCompletedTodos"
         @trigger-event="appStore.deleteCompletedTodo"
       />
     </div>

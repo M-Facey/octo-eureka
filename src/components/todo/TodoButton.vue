@@ -11,6 +11,7 @@ export interface Prop {
   showLabel?: boolean;
   tooltip?: string;
   isThemeButton?: boolean;
+  dataCy: string;
 }
 
 const { onMobile, onDesktop } = useScreenSize();
@@ -30,6 +31,7 @@ defineEmits<{ (e: "triggerEvent"): void }>();
   <button
     :id="buttonId"
     :aria-label="buttonLabel"
+    :data-cy="dataCy"
     class="group/btn border-2 border-transparent focus:border-neutral-600 dark:focus:border-neutral-500 rounded flex gap-1"
     :class="{
       'px-1': buttonSize === 'xs',

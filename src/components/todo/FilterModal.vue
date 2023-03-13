@@ -38,6 +38,7 @@ const changeStatus = (status: string) => {
       <label
         :for="status.value"
         class="relative w-4 h-4 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 hover:bg-neutral-400/30 dark:hover:bg-neutral-900 cursor-pointer rounded group/filter"
+        :data-cy="status.value"
         @click.stop="changeStatus(status.value)"
       >
         <input
@@ -58,6 +59,7 @@ const changeStatus = (status: string) => {
           'font-bold text-neutral-900 dark:text-neutral-300 ':
             status.value === appStore.viewingStatus,
         }"
+        :data-cy="`${status.value}Label`"
         @click="changeStatus(status.value)"
       >
         {{ status.displayName }}
