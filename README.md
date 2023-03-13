@@ -30,7 +30,7 @@ This is a simple todo application created in Vue3 and TailwindCSS.
 ### Chores
 
 - [ ] Re-structure project
-- [ ] Replace banner on `README.md`
+- [x] Replace banner on `README.md`
 
 ## Project Setup
 
