@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
-import { useNotifyStore } from "./notify";
 import type { Todo } from "@/types";
 import { strToDate } from "@/utils";
+
+import { useNotifyStore } from "./notify";
+import { useModalStore } from "./modal";
 
 export const useAppStore = defineStore({
   id: "app",
@@ -9,31 +11,32 @@ export const useAppStore = defineStore({
     todos: [] as Todo[],
     selectedTodo: undefined as Todo | undefined,
     deletedTodos: [] as Todo[],
-    viewingStatus: "all",
-    showModal: "",
-    sortBy: "oldest",
     isEditing: false,
   }),
   getters: {
     getTodosByStatus(): Todo[] {
-      if (this.viewingStatus === "completed") {
+      const modalStore = useModalStore();
+
+      if (modalStore.filterOption === "completed") {
         return this.getTodoBySortOrder.filter((todo) => todo.isCompleted);
-      } else if (this.viewingStatus === "ongoing") {
+      } else if (modalStore.filterOption === "ongoing") {
         return this.getTodoBySortOrder.filter((todo) => !todo.isCompleted);
       }
 
       return this.getTodoBySortOrder;
     },
     getTodoBySortOrder(): Todo[] {
-      if (this.sortBy === "nameAsc") {
+      const modalStore = useModalStore();
+
+      if (modalStore.sortOption === "nameAsc") {
         return this.todos.sort((a, b) => a.name.localeCompare(b.name));
       }
 
-      if (this.sortBy === "nameDesc") {
+      if (modalStore.sortOption === "nameDesc") {
         return this.todos.sort((a, b) => b.name.localeCompare(a.name));
       }
 
-      if (this.sortBy === "newest") {
+      if (modalStore.sortOption === "newest") {
         return this.todos.sort(
           (a, b) =>
             strToDate(b.createdAt).getTime() - strToDate(a.createdAt).getTime()
@@ -104,20 +107,6 @@ export const useAppStore = defineStore({
     },
     undoDeletedTodos() {
       this.todos.push(...this.deletedTodos);
-    },
-    changeStatus(status: string) {
-      this.viewingStatus = status;
-    },
-    setShowModal(modalName: string) {
-      if (this.showModal === modalName) {
-        this.showModal = "";
-        return;
-      }
-      this.showModal = modalName;
-    },
-    setSortBy(sortOrder: string) {
-      if (this.sortBy === sortOrder) return;
-      this.sortBy = sortOrder;
     },
     setSelectedTodo(id: string) {
       this.selectedTodo = this.todos.find((todo) => todo.id === id);
