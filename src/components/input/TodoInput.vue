@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import TodoButton from "./TodoButton.vue";
-import IconClose from "../icons/IconClose.vue";
-import IconSearch from "../icons/IconSearch.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
+import IconClose from "@/components/icons/IconClose.vue";
+import IconSearch from "@/components/icons/IconSearch.vue";
 
 export interface Prop {
   label?: string;

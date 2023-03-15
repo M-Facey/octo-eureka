@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import TodoHeader from "./TodoHeader.vue";
-import TodoList from "./TodoList.vue";
-import TodoFooter from "./TodoFooter.vue";
-import TodoNotificationList from "./TodoNotificationList.vue";
+import TodoHeader from "@/components/section/TodoHeader.vue";
+import TodoList from "@/components/todo/TodoList.vue";
+import TodoFooter from "@/components/section/TodoFooter.vue";
+import TodoNotificationList from "@/components/notification/TodoNotificationList.vue";
 import useScreenSize from "@/composables/useScreenSize";
 
 const { onDesktop, onMobile } = useScreenSize();

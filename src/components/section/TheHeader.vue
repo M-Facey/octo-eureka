@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import useScreenSize from "@/composables/useScreenSize";
-
 const { onDesktop, onMobile, onMobileSm } = useScreenSize();
 </script>
 

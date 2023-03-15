@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import TodoButton from "./TodoButton.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
 
-import IconCheck from "../icons/IconCheck.vue";
-import IconEdit from "../icons/IconEdit.vue";
-import IconClose from "../icons/IconClose.vue";
+import IconCheck from "@/components/icons/IconCheck.vue";
+import IconEdit from "@/components/icons/IconEdit.vue";
+import IconClose from "@/components/icons/IconClose.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 

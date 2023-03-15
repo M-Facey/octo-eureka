@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, watch } from "vue";
 import { usePreferredColorScheme } from "@vueuse/core";
-import TheHeader from "./components/TheHeader.vue";
+import TheHeader from "@/components/section/TheHeader.vue";
 import Todo from "./components/todo/Todo.vue";
 
 import { useThemeStore } from "./stores/theme";

@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { useModalStore } from "@/stores/modal";
-
-import IconCheck from "../icons/IconCheck.vue";
 import type { ModalOption } from "@/types";
+import IconCheck from "@/components/icons/IconCheck.vue";
 
+import { useModalStore } from "@/stores/modal";
 const modalStore = useModalStore();
 
 const changeSortOrder = (option: ModalOption) => {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import TodoButton from "./TodoButton.vue";
-import IconClose from "../icons/IconClose.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
+import IconClose from "@/components/icons/IconClose.vue";
 import { useModalStore } from "@/stores/modal";
 
 const modalStore = useModalStore();

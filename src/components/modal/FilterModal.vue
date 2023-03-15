@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import IconCheck from "../icons/IconCheck.vue";
+import IconCheck from "@/components/icons/IconCheck.vue";
 import type { ModalOption } from "@/types";
 
 import { useModalStore } from "@/stores/modal";

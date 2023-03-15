@@ -2,12 +2,12 @@
 import { computed, ref, watch } from "vue";
 import { nanoid } from "nanoid";
 
-import TodoInput from "./TodoInput.vue";
-import TodoButton from "./TodoButton.vue";
-import TodoItem from "./TodoItem.vue";
+import TodoInput from "@/components/input/TodoInput.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
+import TodoItem from "@/components/todo/TodoItem.vue";
 
-import IconAdd from "../icons/IconAdd.vue";
-import IconClose from "../icons/IconClose.vue";
+import IconAdd from "@/components/icons/IconAdd.vue";
+import IconClose from "@/components/icons/IconClose.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 

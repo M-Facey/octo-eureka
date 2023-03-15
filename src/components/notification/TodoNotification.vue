@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { computed } from "vue";
+
+import TodoButton from "@/components/input/TodoButton.vue";
+import IconUndo from "@/components/icons/IconUndo.vue";
+import IconClose from "@/components/icons/IconClose.vue";
+
 import { useAppStore } from "@/stores/app";
 import { useNotifyStore } from "@/stores/notify";
-import TodoButton from "./TodoButton.vue";
-
-import IconClose from "../icons/IconClose.vue";
-import IconUndo from "../icons/IconUndo.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 

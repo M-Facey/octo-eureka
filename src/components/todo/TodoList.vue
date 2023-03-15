@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import TodoItem from "./TodoItem.vue";
-import EditTodo from "./EditTodo.vue";
-import EmptyTodo from "./EmptyTodo.vue";
+import TodoItem from "@/components/todo/TodoItem.vue";
+import EditTodo from "@/components/todo/EditTodo.vue";
+import EmptyTodo from "@/components/todo/EmptyTodo.vue";
 
 import { useAppStore } from "@/stores/app";
 

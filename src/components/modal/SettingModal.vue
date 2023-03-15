@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import TodoButton from "./TodoButton.vue";
-import IconClose from "../icons/IconClose.vue";
-import IconDelete from "../icons/IconDelete.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
+import IconClose from "@/components/icons/IconClose.vue";
+import IconDelete from "@/components/icons/IconDelete.vue";
 
-import { useAppStore } from "@/stores/app";
-const appStore = useAppStore();
+import { useModalStore } from "@/stores/modal";
+const modalStore = useModalStore();
 
 // So there are situations where the deployment of some releases
 // has a features that changes the structure of the store saved
@@ -33,7 +33,7 @@ const nukeIt = () => {
         button-size="xs"
         :is-icon-button="true"
         data-cy="closeSettingsModal"
-        @trigger-event="appStore.setShowModal('')"
+        @trigger-event="modalStore.resetModal"
       >
         <icon-close class="w-4" />
       </todo-button>

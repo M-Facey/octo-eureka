@@ -3,19 +3,19 @@ import { onMounted, ref } from "vue";
 import { usePreferredColorScheme, onClickOutside } from "@vueuse/core";
 import { nanoid } from "nanoid";
 
-import TodoInput from "./TodoInput.vue";
-import TodoButton from "./TodoButton.vue";
-import FilterModal from "./FilterModal.vue";
-import SortModal from "./SortModal.vue";
-import MobileModal from "./MobileModal.vue";
+import TodoInput from "@/components/input/TodoInput.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
+import FilterModal from "@/components/modal/FilterModal.vue";
+import SortModal from "@/components/modal/SortModal.vue";
+import MobileModal from "@/components/modal/MobileModal.vue";
 
-import IconAdd from "../icons/IconAdd.vue";
-import IconFilter from "../icons/IconFilter.vue";
-import IconSort from "../icons/IconSort.vue";
-import IconSun from "../icons/IconSun.vue";
-import IconMoon from "../icons/IconMoon.vue";
-import IconSystem from "../icons/IconSystem.vue";
-import IconSettings from "../icons/IconSettings.vue";
+import IconAdd from "@/components/icons/IconAdd.vue";
+import IconFilter from "@/components/icons/IconFilter.vue";
+import IconSort from "@/components/icons/IconSort.vue";
+import IconSun from "@/components/icons/IconSun.vue";
+import IconMoon from "@/components/icons/IconMoon.vue";
+import IconSystem from "@/components/icons/IconSystem.vue";
+import IconSettings from "@/components/icons/IconSettings.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 

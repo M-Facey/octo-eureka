@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import TodoNotification from "./TodoNotification.vue";
-import useScreenSize from "@/composables/useScreenSize";
-import { useNotifyStore } from "@/stores/notify";
+import TodoNotification from "@/components/notification/TodoNotification.vue";
 
+import useScreenSize from "@/composables/useScreenSize";
+
+import { useNotifyStore } from "@/stores/notify";
 const notifyStore = useNotifyStore();
 
 const { onMobile } = useScreenSize();

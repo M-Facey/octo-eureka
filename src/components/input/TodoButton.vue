@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import TodoTooltip from "./TodoTooltip.vue";
+import TodoTooltip from "@/components/todo/TodoTooltip.vue";
 import useScreenSize from "@/composables/useScreenSize";
 
 export interface Prop {

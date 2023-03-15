@@ -2,17 +2,19 @@
 import { ref, onMounted, watch } from "vue";
 import { onClickOutside } from "@vueuse/core";
 
-import TodoButton from "./TodoButton.vue";
-import SettingModal from "./SettingModal.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
+import SettingModal from "@/components/modal/SettingModal.vue";
 
-import IconSettings from "../icons/IconSettings.vue";
+import IconSettings from "@/components/icons/IconSettings.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 
 import { useAppStore } from "@/stores/app";
 import { useNotifyStore } from "@/stores/notify";
+import { useModalStore } from "@/stores/modal";
 
 const appStore = useAppStore();
+const modalStore = useModalStore();
 const notifyStore = useNotifyStore();
 
 const { onMobile, onDesktop } = useScreenSize();
@@ -33,7 +35,7 @@ onMounted(() => {
     const element = event.target as HTMLDivElement;
     if (element.id === "open-settings-modal") return;
 
-    appStore.setShowModal("");
+    modalStore.resetModal();
   });
 });
 </script>
@@ -57,13 +59,13 @@ onMounted(() => {
           button-size="sm"
           tooltip="Settings"
           data-cy="openSettingsModal"
-          @trigger-event="appStore.setShowModal('settings')"
+          @trigger-event="modalStore.createSettingsModal()"
         >
           <icon-settings class="w-5 pointer-events-none" />
         </todo-button>
         <transition name="todo-fade">
           <setting-modal
-            v-if="appStore.showModal === 'settings'"
+            v-if="modalStore.modalType === 'settings'"
             ref="settingModal"
           />
         </transition>
