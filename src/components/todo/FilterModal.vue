@@ -1,31 +1,15 @@
 <script lang="ts" setup>
-import { ref } from "vue";
-import { useAppStore } from "@/stores/app";
-
 import IconCheck from "../icons/IconCheck.vue";
+import type { ModalOption } from "@/types";
 
-const appStore = useAppStore();
-const statuses = ref([
-  {
-    value: "all",
-    displayName: "All",
-  },
-  {
-    value: "ongoing",
-    displayName: "Ongoing",
-  },
-  {
-    value: "completed",
-    displayName: "Completed",
-  },
-]);
+import { useModalStore } from "@/stores/modal";
+const modalStore = useModalStore();
 
-const changeStatus = (status: string) => {
-  if (appStore.viewingStatus === status) return;
+const changeStatus = (option: ModalOption) => {
+  option.event();
 
-  appStore.changeStatus(status);
   setTimeout(() => {
-    appStore.setShowModal("filter");
+    modalStore.resetModal();
   }, 250);
 };
 </script>
@@ -34,18 +18,21 @@ const changeStatus = (status: string) => {
   <div
     class="absolute top-full -right-3 translate-y-3 flex flex-col gap-1 bg-neutral-300 dark:bg-neutral-800 border border-neutral-700 dark:border-neutral-700/70 p-2 cursor-default rounded-lg"
   >
-    <div v-for="status in statuses" class="flex items-center gap-x-2">
+    <div
+      v-for="option in modalStore.modalOptions"
+      class="flex items-center gap-x-2"
+    >
       <label
-        :for="status.value"
+        :for="option.value"
         class="relative w-4 h-4 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 hover:bg-neutral-400/30 dark:hover:bg-neutral-900 cursor-pointer rounded group/filter"
-        :data-cy="status.value"
-        @click.stop="changeStatus(status.value)"
+        :data-cy="option.value"
+        @click.stop="changeStatus(option)"
       >
         <input
-          :id="status.value"
+          :id="option.value"
           type="radio"
           class="absolute w-full h-full opacity-0 peer"
-          :checked="status.value === appStore.viewingStatus"
+          :checked="option.value === modalStore.currentModalOption"
         />
         <icon-check
           class="w-3 opacity-0 peer-checked:opacity-100 group-hover/filter:opacity-40"
@@ -55,14 +42,14 @@ const changeStatus = (status: string) => {
         class="cursor-pointer"
         :class="{
           'text-neutral-500 hover:text-neutral-400':
-            status.value !== appStore.viewingStatus,
+            option.value !== modalStore.currentModalOption,
           'font-bold text-neutral-900 dark:text-neutral-300 ':
-            status.value === appStore.viewingStatus,
+            option.value === modalStore.currentModalOption,
         }"
-        :data-cy="`${status.value}Label`"
-        @click="changeStatus(status.value)"
+        :data-cy="`${option.value}Label`"
+        @click="changeStatus(option)"
       >
-        {{ status.displayName }}
+        {{ option.displayName }}
       </p>
     </div>
   </div>

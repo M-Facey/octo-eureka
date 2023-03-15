@@ -61,7 +61,6 @@ const setTheme = () => {
 };
 
 const setModal = (modalType: string) => {
-  appStore.setShowModal(modalType);
   if (modalType === "filter") {
     modalStore.createFilterModal();
   } else if (modalType === "sort") {
@@ -76,14 +75,14 @@ onMounted(() => {
     const element = event.target as HTMLButtonElement;
     if (element.id === "filter-todo") return;
 
-    appStore.setShowModal("");
+    modalStore.resetModal();
   });
 
   onClickOutside(sortModal, (event) => {
     const element = event.target as HTMLButtonElement;
     if (element.id === "sort-todo") return;
 
-    appStore.setShowModal("");
+    modalStore.resetModal();
   });
 });
 </script>
@@ -135,7 +134,7 @@ onMounted(() => {
         </todo-button>
         <transition v-if="!onMobileMd" name="todo-fade">
           <filter-modal
-            v-if="appStore.showModal === 'filter'"
+            v-if="modalStore.modalType === 'filter'"
             ref="filterModal"
             class="absolute z-10"
           />
@@ -157,7 +156,7 @@ onMounted(() => {
         </todo-button>
         <transition v-if="!onMobileMd" name="todo-fade">
           <sort-modal
-            v-if="appStore.showModal === 'sort'"
+            v-if="modalStore.modalType === 'sort'"
             ref="sortModal"
             class="absolute z-10"
             @click.stop
