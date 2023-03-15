@@ -14,3 +14,9 @@ export interface Notification {
   timerId: number;
   canUndo: boolean;
 }
+
+export interface ModalOption {
+  displayName: string;
+  value: string;
+  event: () => void;
+}
