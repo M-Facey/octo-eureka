@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import TodoButton from "@/components/todo/TodoButton.vue";
+import TodoButton from "@/components/input/TodoButton.vue";
 
 describe("Todo Button Component", () => {
   it("should render", () => {

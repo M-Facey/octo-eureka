@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import TodoInput from "@/components/todo/TodoInput.vue";
+import TodoInput from "@/components/input/TodoInput.vue";
 
 describe("Todo Input Component", () => {
   it("should render", () => {
@@ -9,6 +9,9 @@ describe("Todo Input Component", () => {
         type: "text",
         placeholder: "",
         modelValue: "",
+        inputDataCy: "inputCy",
+        clearDataCy: "clearCy",
+        searchDataCy: "searchCy",
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
