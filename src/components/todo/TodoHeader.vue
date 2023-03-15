@@ -7,6 +7,7 @@ import TodoInput from "./TodoInput.vue";
 import TodoButton from "./TodoButton.vue";
 import FilterModal from "./FilterModal.vue";
 import SortModal from "./SortModal.vue";
+import MobileModal from "./MobileModal.vue";
 
 import IconAdd from "../icons/IconAdd.vue";
 import IconFilter from "../icons/IconFilter.vue";
@@ -20,9 +21,11 @@ import useScreenSize from "@/composables/useScreenSize";
 
 import { useAppStore } from "@/stores/app";
 import { useThemeStore } from "@/stores/theme";
+import { useModalStore } from "@/stores/modal";
 
 const appStore = useAppStore();
 const themeStore = useThemeStore();
+const modalStore = useModalStore();
 
 const { onDesktop, onMobileMd, betweenMobileSmAndMd } = useScreenSize();
 
@@ -57,6 +60,17 @@ const setTheme = () => {
   }
 };
 
+const setModal = (modalType: string) => {
+  appStore.setShowModal(modalType);
+  if (modalType === "filter") {
+    modalStore.createFilterModal();
+  } else if (modalType === "sort") {
+    modalStore.createSortModal();
+  } else if (modalType == "settings") {
+    modalStore.createSettingsModal();
+  }
+};
+
 onMounted(() => {
   onClickOutside(filterModal, (event) => {
     const element = event.target as HTMLButtonElement;
@@ -76,7 +90,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex gap-3 p-4"
+    class="relative flex gap-3 p-4"
     :class="{ 'flex-col': onMobileMd, 'flex-row': onDesktop }"
   >
     <div class="flex flex-grow gap-3">
@@ -115,11 +129,11 @@ onMounted(() => {
           :show-label="betweenMobileSmAndMd"
           :class="{ 'w-full justify-center': onMobileMd }"
           data-cy="openFilterModal"
-          @trigger-event="appStore.setShowModal('filter')"
+          @trigger-event="setModal('filter')"
         >
           <icon-filter class="w-5 pointer-events-none" />
         </todo-button>
-        <transition name="todo-fade">
+        <transition v-if="!onMobileMd" name="todo-fade">
           <filter-modal
             v-if="appStore.showModal === 'filter'"
             ref="filterModal"
@@ -137,13 +151,13 @@ onMounted(() => {
           :show-label="betweenMobileSmAndMd"
           :class="{ 'w-full justify-center': onMobileMd }"
           data-cy="openSortModal"
-          @trigger-event="appStore.setShowModal('sortBy')"
+          @trigger-event="setModal('sort')"
         >
           <icon-sort class="w-5 h-[1.20rem] mt-[3px] pointer-events-none" />
         </todo-button>
-        <transition name="todo-fade">
+        <transition v-if="!onMobileMd" name="todo-fade">
           <sort-modal
-            v-if="appStore.showModal === 'sortBy'"
+            v-if="appStore.showModal === 'sort'"
             ref="sortModal"
             class="absolute z-10"
             @click.stop
@@ -160,6 +174,7 @@ onMounted(() => {
         :show-label="betweenMobileSmAndMd"
         data-cy="openMobileSettingsModal"
         :class="{ 'w-1/3 justify-center': onMobileMd }"
+        @trigger-event="setModal('settings')"
       >
         <icon-settings class="w-5 pointer-events-none" />
       </todo-button>
@@ -183,5 +198,7 @@ onMounted(() => {
         <icon-system v-show="themeStore.getTheme === 'system'" class="w-5" />
       </todo-button>
     </teleport>
+
+    <mobile-modal v-if="modalStore.modalType && onMobileMd" />
   </div>
 </template>

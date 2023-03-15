@@ -29,7 +29,7 @@ const changeSortOrder = (status: string) => {
 
   appStore.setSortBy(status);
   setTimeout(() => {
-    appStore.setShowModal("sortBy");
+    appStore.setShowModal("sort");
   }, 250);
 };
 </script>
