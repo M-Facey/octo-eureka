@@ -7,7 +7,7 @@ const modalStore = useModalStore();
 </script>
 
 <template>
-  <div class="absolute bottom-0 inset-x-0 translate-y-full bg-neutral-700 p-2">
+  <div class="absolute bottom-0 inset-x-0 translate-y-full bg-neutral-700 p-2 z-10">
     <div class="flex items-center justify-between mb-2">
       <h3 class="text-neutral-400 font-black uppercase tracking-wider">
         {{ modalStore.modalType }} modal
