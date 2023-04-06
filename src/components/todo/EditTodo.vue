@@ -157,7 +157,7 @@ watch(
         data-cy="showDescription"
         @click="changeView('description')"
       >
-        Description
+        {{ onMobile ? "Desc" : "Description" }}
       </button>
       <button
         class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white uppercase tracking-widest px-4 py-2 rounded"
