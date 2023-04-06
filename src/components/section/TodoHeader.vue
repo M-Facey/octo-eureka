@@ -7,6 +7,7 @@ import TodoInput from "@/components/input/TodoInput.vue";
 import TodoButton from "@/components/input/TodoButton.vue";
 import FilterModal from "@/components/modal/FilterModal.vue";
 import SortModal from "@/components/modal/SortModal.vue";
+import TagModal from "@/components/modal/TagModal.vue";
 import MobileModal from "@/components/modal/MobileModal.vue";
 
 import IconAdd from "@/components/icons/IconAdd.vue";
@@ -16,6 +17,7 @@ import IconSun from "@/components/icons/IconSun.vue";
 import IconMoon from "@/components/icons/IconMoon.vue";
 import IconSystem from "@/components/icons/IconSystem.vue";
 import IconSettings from "@/components/icons/IconSettings.vue";
+import IconHash from "@/components/icons/IconHash.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 
@@ -47,6 +49,7 @@ const addNewTodo = () => {
 
 const filterModal = ref<HTMLElement | null>(null);
 const sortModal = ref<HTMLElement | null>(null);
+const tagModal = ref<HTMLElement | null>(null);
 
 const setTheme = () => {
   const preferredColorScheme = usePreferredColorScheme();
@@ -65,6 +68,8 @@ const setModal = (modalType: string) => {
     modalStore.createFilterModal();
   } else if (modalType === "sort") {
     modalStore.createSortModal();
+  } else if (modalType === "tag") {
+    modalStore.createTagModal();
   } else if (modalType == "settings") {
     modalStore.createSettingsModal();
   }
@@ -81,6 +86,13 @@ onMounted(() => {
   onClickOutside(sortModal, (event) => {
     const element = event.target as HTMLButtonElement;
     if (element.id === "sort-todo") return;
+
+    modalStore.resetModal();
+  });
+
+  onClickOutside(tagModal, (event) => {
+    const element = event.target as HTMLButtonElement;
+    if (element.id === "tag-todo") return;
 
     modalStore.resetModal();
   });
@@ -126,7 +138,7 @@ onMounted(() => {
           button-size="sm"
           tooltip="Filter"
           :show-label="betweenMobileSmAndMd"
-          :class="{ 'w-full justify-center': onMobileMd }"
+          :class="{ 'w-full items-center justify-center text-sm': onMobileMd }"
           data-cy="openFilterModal"
           @trigger-event="setModal('filter')"
         >
@@ -143,12 +155,34 @@ onMounted(() => {
 
       <div class="relative" :class="{ 'w-1/3': onMobileMd }">
         <todo-button
+          button-id="tag-todo"
+          button-label="Tag"
+          button-size="sm"
+          tooltip="Tag"
+          :show-label="betweenMobileSmAndMd"
+          :class="{ 'w-full items-center justify-center text-sm': onMobileMd }"
+          data-cy="openTagModal"
+          @trigger-event="setModal('tag')"
+        >
+          <icon-hash class="w-5 pointer-events-none" />
+        </todo-button>
+        <transition v-if="!onMobileMd" name="todo-fade">
+          <tag-modal
+            v-if="modalStore.modalType === 'tag'"
+            ref="tagModal"
+            class="absolute z-10"
+          />
+        </transition>
+      </div>
+
+      <div class="relative" :class="{ 'w-1/3': onMobileMd }">
+        <todo-button
           button-id="sort-todo"
           button-label="Sort"
           button-size="sm"
           tooltip="Sort"
           :show-label="betweenMobileSmAndMd"
-          :class="{ 'w-full justify-center': onMobileMd }"
+          :class="{ 'w-full items-center justify-center text-sm': onMobileMd }"
           data-cy="openSortModal"
           @trigger-event="setModal('sort')"
         >
@@ -172,7 +206,7 @@ onMounted(() => {
         tooltip="Settings"
         :show-label="betweenMobileSmAndMd"
         data-cy="openMobileSettingsModal"
-        :class="{ 'w-1/3 justify-center': onMobileMd }"
+        :class="{ 'w-1/3 items-center justify-center text-sm': onMobileMd }"
         @trigger-event="setModal('settings')"
       >
         <icon-settings class="w-5 pointer-events-none" />
