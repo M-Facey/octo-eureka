@@ -9,6 +9,7 @@ describe("Todo Item Component", () => {
         todoId: "1",
         todoName: "Simple Task",
         isCompleted: true,
+        dataCy: "simpleTask",
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
