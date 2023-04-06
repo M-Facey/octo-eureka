@@ -8,16 +8,35 @@ import TodoItem from "@/components/todo/TodoItem.vue";
 
 import IconAdd from "@/components/icons/IconAdd.vue";
 import IconClose from "@/components/icons/IconClose.vue";
+import IconAlert from "@/components/icons/IconAlert.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 
 import { useAppStore } from "@/stores/app";
 import { useNotifyStore } from "@/stores/notify";
+import { useTagStore } from "@/stores/tag";
 
 const appStore = useAppStore();
 const notifyStore = useNotifyStore();
+const tagStore = useTagStore();
 
 const { onMobile } = useScreenSize();
+
+const tagInput = ref("");
+
+const addTags = () => {
+  if (!appStore.selectedTodo) return;
+
+  tagStore.addNewTag(tagInput.value, appStore.selectedTodo.id);
+  tagInput.value = "";
+};
+
+const removeTag = (tag: string) => {
+  if (!appStore.selectedTodo) return;
+
+  tagStore.removeTag(tag, appStore.selectedTodo.id);
+  tagInput.value = "";
+};
 
 const subtaskInput = ref("");
 
@@ -105,9 +124,50 @@ watch(
       </button>
     </div>
 
+    <div class="mb-1">
+      <p class="flex items-center gap-1 text-neutral-400 text-sm mb-1">
+        <icon-alert class="w-4 text-red-400" />
+        <span>Click tag to delete it </span>
+      </p>
+      <div
+        class="flex flex-wrap gap-1.5 mx-auto"
+        :class="{ 'mb-2': tagStore.getTagsByTodo.length !== 0 }"
+      >
+        <button
+          v-for="tag in tagStore.getTagsByTodo"
+          class="w-[30%] bg-white/10 hover:bg-red-500 px-1 py-0.5 text-white text-sm text-ellipsis overflow-hidden rounded-md"
+          @click="removeTag(tag)"
+        >
+          {{ tag }}
+        </button>
+      </div>
+      <div class="flex gap-2">
+        <todo-input
+          type="text"
+          placeholder="Enter Tag"
+          v-model="tagInput"
+          class="flex-grow ml-1"
+          input-data-cy="tagInput"
+          clear-data-cy="clearTags"
+          search-data-cy="addTags"
+          @trigger-event-on-enter="addTags()"
+        />
+        <todo-button
+          button-id="add-subtask"
+          button-label="Add Subtask"
+          button-size="xs"
+          :show-label="false"
+          data-cy="addTags"
+          @trigger-event="addTags()"
+        >
+          <icon-add class="w-5 my-1" />
+        </todo-button>
+      </div>
+    </div>
+
     <div
       v-if="!onMobile || viewSection === 'description'"
-      class="flex-shrink-0"
+      class="flex-shrink-0 pl-1"
     >
       <label
         v-if="!onMobile"
