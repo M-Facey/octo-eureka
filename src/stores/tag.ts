@@ -23,7 +23,13 @@ export const useTagStore = defineStore({
       return todoTags;
     },
     getAllTags(): string[] {
-      return Object.keys(this.tags);
+      let tags: string[] = [];
+      for (const tag of Object.keys(this.tags)) {
+        if (this.tags[tag].length !== 0) {
+          tags.push(tag);
+        }
+      }
+      return tags;
     },
   },
   actions: {
@@ -35,7 +41,7 @@ export const useTagStore = defineStore({
         return;
       }
 
-      const tagExists = tags?.find((t) => t === tag);
+      const tagExists = tags.find((t) => t === tag);
       if (!tagExists) {
         this.tags[tag] = [todoId];
         return;
@@ -52,12 +58,15 @@ export const useTagStore = defineStore({
       const tags = Object.keys(this.tags);
       const tagExists = tags.find((t) => t === tag);
       if (tags.length !== 0 && tagExists) {
-        this.tags[tag] = this.tags[tag].filter((id) => id !== todoId);
+        let filteredTag = this.tags[tag].filter((id) => id !== todoId);
+        if (filteredTag) {
+          this.tags[tag] = filteredTag;
+        }
       }
 
       const hasNoTodos = this.tags[tag].length === 0;
       if (tagExists && hasNoTodos) {
-        delete this.tags[tag];
+        this.tags[tag] = [];
       }
     },
     removeTagsForTodo(todoId: string) {
