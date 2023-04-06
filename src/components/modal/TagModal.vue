@@ -40,7 +40,7 @@ const changeStatus = (option: ModalOption) => {
           />
         </label>
         <p
-          class="cursor-pointer"
+          class="max-w-[100px] text-ellipsis whitespace-nowrap overflow-hidden cursor-pointer"
           :class="{
             'text-neutral-500 hover:text-neutral-400':
               option.value !== modalStore.currentModalOption,
