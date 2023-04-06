@@ -50,6 +50,22 @@ export const useAppStore = defineStore({
           strToDate(a.createdAt).getTime() - strToDate(b.createdAt).getTime()
       );
     },
+    getTodosByTag(): Todo[] {
+      const modalStore = useModalStore();
+      const tagStore = useTagStore();
+      const todos: Todo[] = [];
+
+      if (modalStore.tagOption === "noTag") return this.getTodosByStatus;
+
+      for (let todoId of tagStore.tags[modalStore.tagOption]) {
+        const todo = this.getTodosByStatus.find((t) => t.id === todoId);
+        if (todo) {
+          todos.push(todo);
+        }
+      }
+
+      return todos;
+    },
     getTotalOnGoingTodos(): number {
       return this.todos.filter((todo) => !todo.isCompleted).length;
     },
