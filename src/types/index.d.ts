@@ -20,3 +20,7 @@ export interface ModalOption {
   value: string;
   event: () => void;
 }
+
+export interface Tags {
+  [key: string]: string[];
+}
