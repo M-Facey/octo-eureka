@@ -109,8 +109,10 @@ watch(
     </div>
 
     <div class="mb-1">
-      <p class="flex items-center gap-1 text-neutral-400 text-sm mb-1">
-        <icon-alert class="w-4 text-red-400" />
+      <p
+        class="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 text-sm mb-1"
+      >
+        <icon-alert class="w-4 text-red-500" />
         <span>Click tag to delete it </span>
       </p>
       <div
@@ -119,7 +121,7 @@ watch(
       >
         <button
           v-for="tag in tagStore.getTagsByTodo"
-          class="w-[31%] bg-white/10 hover:bg-red-500 transition-colors px-1 py-0.5 text-white text-sm text-ellipsis overflow-hidden rounded-md"
+          class="w-[31%] bg-black/20 dark:bg-white/10 hover:bg-red-500 transition-colors px-1 py-0.5 text-black dark:text-white text-sm text-ellipsis overflow-hidden rounded-md"
           @click="removeTag(tag)"
         >
           {{ tag }}
