@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { ModalOption } from "@/types";
+import { useTagStore } from "./tag";
 
 export const useModalStore = defineStore({
   id: "modal",
@@ -8,11 +9,14 @@ export const useModalStore = defineStore({
     modalType: "",
     filterOption: "all",
     sortOption: "oldest",
+    tagOption: "noTag",
   }),
   getters: {
     currentModalOption(): string {
       if (this.modalType === "filter") return this.filterOption;
-      return this.sortOption;
+      if (this.modalType === "sort") return this.sortOption;
+      if (this.modalType === "tag") return this.tagOption;
+      return "";
     },
   },
   actions: {
@@ -54,6 +58,26 @@ export const useModalStore = defineStore({
         setOption("completed")
       );
     },
+    // tag modal
+    createTagModal() {
+      const tagStore = useTagStore();
+      const { resetModal, setTagOption: setOption } = this;
+
+      resetModal();
+
+      this.modalType = "tag";
+      this.addModalOption("No tags", "noTag", () => setOption("noTag"));
+
+      for (let t of tagStore.getAllTags) {
+        this.addModalOption(t, t, () => setOption(t));
+      }
+    },
+    setTagOption(option: string) {
+      if (this.tagOption === option) return;
+      this.tagOption = option;
+
+      this.resetModal();
+    },
     // settings modal
     createSettingsModal() {
       this.resetModal();
@@ -64,7 +88,7 @@ export const useModalStore = defineStore({
         location.reload();
       });
     },
-    // general utilties
+    // general utilities
     resetModal() {
       this.modalOptions = [];
       this.modalType = "";
