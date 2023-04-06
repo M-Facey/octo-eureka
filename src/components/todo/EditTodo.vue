@@ -25,7 +25,10 @@ const { onMobile } = useScreenSize();
 const tagInput = ref("");
 
 const addTags = () => {
-  if (!appStore.selectedTodo) return;
+  if (!appStore.selectedTodo || tagStore.getTagsByTodo.length >= 6) {
+    tagInput.value = "";
+    return;
+  }
 
   tagStore.addNewTag(tagInput.value, appStore.selectedTodo.id);
   tagInput.value = "";
@@ -86,7 +89,7 @@ watch(
     class="flex flex-col h-full"
     :class="{
       'w-1/3 mx-3': !onMobile,
-      'absolute w-full bg-neutral-200 dark:bg-neutral-900': onMobile,
+      'absolute w-full pl-1 bg-neutral-200 dark:bg-neutral-900': onMobile,
     }"
   >
     <div class="flex items-center justify-between">
@@ -103,6 +106,48 @@ watch(
       >
         <icon-close class="w-5" />
       </todo-button>
+    </div>
+
+    <div class="mb-1">
+      <p class="flex items-center gap-1 text-neutral-400 text-sm mb-1">
+        <icon-alert class="w-4 text-red-400" />
+        <span>Click tag to delete it </span>
+      </p>
+      <div
+        class="flex flex-wrap justify-center gap-1.5 mx-auto"
+        :class="{ 'mb-2': tagStore.getTagsByTodo.length !== 0 }"
+      >
+        <button
+          v-for="tag in tagStore.getTagsByTodo"
+          class="w-[31%] bg-white/10 hover:bg-red-500 transition-colors px-1 py-0.5 text-white text-sm text-ellipsis overflow-hidden rounded-md"
+          @click="removeTag(tag)"
+        >
+          {{ tag }}
+        </button>
+      </div>
+      <div class="flex gap-2">
+        <todo-input
+          type="text"
+          placeholder="Enter Tag"
+          v-model="tagInput"
+          class="flex-grow"
+          :class="{ 'ml-1': !onMobile }"
+          input-data-cy="tagInput"
+          clear-data-cy="clearTags"
+          search-data-cy="addTags"
+          @trigger-event-on-enter="addTags()"
+        />
+        <todo-button
+          button-id="add-subtask"
+          button-label="Add Subtask"
+          button-size="xs"
+          :show-label="false"
+          data-cy="addTags"
+          @trigger-event="addTags()"
+        >
+          <icon-add class="w-5 my-1" />
+        </todo-button>
+      </div>
     </div>
 
     <div v-if="onMobile" class="flex gap-2 my-2">
@@ -124,50 +169,10 @@ watch(
       </button>
     </div>
 
-    <div class="mb-1">
-      <p class="flex items-center gap-1 text-neutral-400 text-sm mb-1">
-        <icon-alert class="w-4 text-red-400" />
-        <span>Click tag to delete it </span>
-      </p>
-      <div
-        class="flex flex-wrap gap-1.5 mx-auto"
-        :class="{ 'mb-2': tagStore.getTagsByTodo.length !== 0 }"
-      >
-        <button
-          v-for="tag in tagStore.getTagsByTodo"
-          class="w-[30%] bg-white/10 hover:bg-red-500 px-1 py-0.5 text-white text-sm text-ellipsis overflow-hidden rounded-md"
-          @click="removeTag(tag)"
-        >
-          {{ tag }}
-        </button>
-      </div>
-      <div class="flex gap-2">
-        <todo-input
-          type="text"
-          placeholder="Enter Tag"
-          v-model="tagInput"
-          class="flex-grow ml-1"
-          input-data-cy="tagInput"
-          clear-data-cy="clearTags"
-          search-data-cy="addTags"
-          @trigger-event-on-enter="addTags()"
-        />
-        <todo-button
-          button-id="add-subtask"
-          button-label="Add Subtask"
-          button-size="xs"
-          :show-label="false"
-          data-cy="addTags"
-          @trigger-event="addTags()"
-        >
-          <icon-add class="w-5 my-1" />
-        </todo-button>
-      </div>
-    </div>
-
     <div
       v-if="!onMobile || viewSection === 'description'"
-      class="flex-shrink-0 pl-1"
+      class="flex-shrink-0"
+      :class="{ 'pl-1': !onMobile }"
     >
       <label
         v-if="!onMobile"
@@ -186,12 +191,13 @@ watch(
       v-if="!onMobile || viewSection === 'subtasks'"
       class="flex flex-col flex-grow overflow-hidden"
     >
-      <div class="w-full flex gap-x-2 mt-2">
+      <div class="w-full flex gap-x-2 mt-1.5">
         <todo-input
           type="text"
           placeholder="Enter Subtask"
           v-model="subtaskInput"
-          class="flex-grow ml-1"
+          class="flex-grow"
+          :class="{ 'ml-1': !onMobile }"
           input-data-cy="subtaskInput"
           clear-data-cy="clearSubtaskInput"
           search-data-cy="searchSubtask"
