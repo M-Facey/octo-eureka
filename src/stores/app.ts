@@ -4,6 +4,7 @@ import { strToDate } from "@/utils";
 
 import { useNotifyStore } from "./notify";
 import { useModalStore } from "./modal";
+import { useTagStore } from "./tag";
 
 export const useAppStore = defineStore({
   id: "app",
@@ -87,6 +88,7 @@ export const useAppStore = defineStore({
     },
     deleteTodo(id: string) {
       const notifyStore = useNotifyStore();
+      const tagStore = useTagStore();
       const currentTodo = this.todos.find((todo) => todo.id === id);
 
       if (currentTodo) {
@@ -100,6 +102,7 @@ export const useAppStore = defineStore({
           `You've deleted ${this.deletedTodos.length} todos`
         );
       }
+      tagStore.removeTagsForTodo(id);
       this.todos = this.todos.filter((todo) => todo.id !== id);
     },
     deleteCompletedTodo() {
