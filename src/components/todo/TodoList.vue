@@ -10,7 +10,7 @@ const appStore = useAppStore();
 
 <template>
   <div
-    v-if="appStore.getTodosByStatus.length"
+    v-if="appStore.getTodosByTag.length"
     class="relative flex flex-grow overflow-hidden mx-4"
   >
     <transition-group
@@ -19,7 +19,7 @@ const appStore = useAppStore();
       class="relative flex flex-grow flex-col gap-y-3 overflow-x-hidden overflow-y-auto"
     >
       <todo-item
-        v-for="todo in appStore.getTodosByStatus"
+        v-for="todo in appStore.getTodosByTag"
         :key="todo.id"
         :todo-id="todo.id"
         :todo-name="todo.name"
