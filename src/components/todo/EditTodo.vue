@@ -78,6 +78,8 @@ watch(
         "success",
         `You've completed all subtasks for ${appStore.selectedTodo.name}`
       );
+    } else {
+      appStore.selectedTodo.isCompleted = false;
     }
   }
 );

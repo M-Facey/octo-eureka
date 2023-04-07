@@ -143,6 +143,8 @@ export const useAppStore = defineStore({
         return;
       }
 
+      this.selectedTodo.isCompleted = false;
+
       this.selectedTodo.subtasks.push(todo);
     },
     toggleSubtaskIsCompleted(id: string) {
