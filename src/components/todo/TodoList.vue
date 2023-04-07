@@ -16,7 +16,7 @@ const appStore = useAppStore();
     <transition-group
       name="todo-list"
       tag="div"
-      class="relative flex flex-grow flex-col gap-y-3 overflow-x-hidden overflow-y-auto"
+      class="custom_scroll relative flex flex-grow flex-col gap-y-3 pr-2 overflow-x-hidden overflow-y-auto"
     >
       <todo-item
         v-for="todo in appStore.getTodosByTag"
@@ -25,6 +25,7 @@ const appStore = useAppStore();
         :todo-name="todo.name"
         :is-completed="todo.isCompleted"
         :can-edit="true"
+        :has-sub-task="todo.subtasks.length > 0"
         data-cy="todo"
         @toggle-completed="appStore.toggleIsCompleted(todo.id)"
         @edit-todo="appStore.setSelectedTodo(todo.id)"
