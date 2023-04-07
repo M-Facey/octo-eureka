@@ -13,10 +13,12 @@ export interface Prop {
   isCompleted: boolean;
   canEdit?: boolean;
   dataCy: string;
+  hasSubTask?: boolean;
 }
 
 withDefaults(defineProps<Prop>(), {
   canEdit: false,
+  hasSubTask: false,
 });
 
 defineEmits<{
@@ -36,6 +38,7 @@ const { onMobile } = useScreenSize();
     <label
       for="taskCheck"
       class="relative w-6 h-6 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 rounded"
+      :class="{ 'pointer-events-none': hasSubTask }"
       data-cy="todoCheck"
       @click="$emit('toggleCompleted')"
     >
