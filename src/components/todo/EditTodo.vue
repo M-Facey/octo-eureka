@@ -223,7 +223,7 @@ watch(
         v-if="appStore.selectedTodo.subtasks.length"
         name="todo-list"
         tag="div"
-        class="relative flex flex-col gap-y-3 my-3 overflow-y-auto"
+        class="custom_scroll relative flex flex-col gap-y-3 my-3 pr-2 overflow-y-auto"
       >
         <todo-item
           v-for="{ id, name, isCompleted } in appStore.selectedTodo.subtasks"
