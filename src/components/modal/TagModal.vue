@@ -56,22 +56,3 @@ const changeStatus = (option: ModalOption) => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.custom_scroll::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  @apply bg-black/5 dark:bg-white/10;
-  /* background-color: #f5f5f552; */
-}
-
-.custom_scroll::-webkit-scrollbar {
-  width: 5px;
-}
-
-.custom_scroll::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  @apply bg-blue-500;
-}
-</style>
