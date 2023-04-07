@@ -2,7 +2,7 @@
 
 exports[`Todo Input Component > should render 1`] = `
 "<div data-v-2f484e0f=\\"\\" class=\\"relative flex flex-col\\">
-  <!--v-if--><input data-v-2f484e0f=\\"\\" type=\\"text\\" placeholder=\\"\\" class=\\"w-full h-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 py-2 outline-none rounded-md pl-3 pr-20\\" data-cy=\\"inputCy\\">
+  <!--v-if--><input data-v-2f484e0f=\\"\\" type=\\"text\\" placeholder=\\"\\" class=\\"w-full h-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 py-2 outline-none rounded-md pl-3 pr-10\\" data-cy=\\"inputCy\\">
   <div data-v-2f484e0f=\\"\\" class=\\"absolute top-1/2 right-2 -translate-y-1/2 flex gap-2 mb-[3px]\\">
     <transition-stub data-v-2f484e0f=\\"\\" name=\\"fade\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
       <!--v-if-->
