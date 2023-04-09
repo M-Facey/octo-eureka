@@ -13,6 +13,7 @@ export const useAppStore = defineStore({
     selectedTodo: undefined as Todo | undefined,
     deletedTodos: [] as Todo[],
     isEditing: false,
+    version: "",
   }),
   getters: {
     getTodosByStatus(): Todo[] {

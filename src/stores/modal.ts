@@ -10,6 +10,7 @@ export const useModalStore = defineStore({
     filterOption: "all",
     sortOption: "oldest",
     tagOption: "noTag",
+    newFeature: false,
   }),
   getters: {
     currentModalOption(): string {
