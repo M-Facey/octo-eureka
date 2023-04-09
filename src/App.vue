@@ -67,7 +67,7 @@ watch(
 <template>
   <main class="relative h-screen bg-neutral-400 overflow-hidden">
     <the-header />
-    <todo :version="appStore.version" />
+    <todo :version="version" />
     <new-feature v-if="modalStore.newFeature" :version="version" />
   </main>
 </template>
