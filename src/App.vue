@@ -1,14 +1,25 @@
 <script setup lang="ts">
 import { onMounted, watch } from "vue";
 import { usePreferredColorScheme } from "@vueuse/core";
-import TheHeader from "@/components/section/TheHeader.vue";
-import Todo from "./components/todo/Todo.vue";
 
-import { useThemeStore } from "./stores/theme";
+import { version } from "../package.json";
+
+import TheHeader from "@/components/section/TheHeader.vue";
+import Todo from "@/components/todo/Todo.vue";
+import NewFeature from "@/components/modal/NewFeature.vue";
+
+import { useAppStore } from "@/stores/app";
+import { useThemeStore } from "@/stores/theme";
+import { useModalStore } from "@/stores/modal";
+
+const appStore = useAppStore();
 const themeStore = useThemeStore();
+const modalStore = useModalStore();
+
 const preferredColorScheme = usePreferredColorScheme();
 
 onMounted(() => {
+  // set the theme of the application on page loads
   if (
     themeStore.getTheme === "light" ||
     preferredColorScheme.value === "light"
@@ -16,6 +27,16 @@ onMounted(() => {
     document.documentElement.classList.remove("dark");
   } else {
     document.documentElement.classList.add("dark");
+  }
+
+  // open feature modal when version change
+  if (appStore.version) {
+    const incomingMajorVersion = parseInt(version.split(".")[1]);
+    const currentMajorVersion = parseInt(appStore.version.split(".")[1]);
+
+    if (incomingMajorVersion > currentMajorVersion) {
+      modalStore.newFeature = true;
+    }
   }
 });
 
@@ -37,5 +58,6 @@ watch(
   <main class="relative h-screen bg-neutral-400 overflow-hidden">
     <the-header />
     <todo />
+    <new-feature v-if="modalStore.newFeature" :version="version" />
   </main>
 </template>
