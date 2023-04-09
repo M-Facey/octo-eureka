@@ -88,7 +88,7 @@ watch(
 <template>
   <div
     v-if="appStore.selectedTodo"
-    class="flex flex-col h-full"
+    class="custom_scroll h-full flex flex-col pr-2 overflow-y-auto"
     :class="{
       'w-1/3 mx-3': !onMobile,
       'absolute w-full pl-1 bg-neutral-200 dark:bg-neutral-900': onMobile,
@@ -193,7 +193,7 @@ watch(
 
     <div
       v-if="!onMobile || viewSection === 'subtasks'"
-      class="flex flex-col flex-grow overflow-hidden"
+      class="min-h-[180px] flex flex-col flex-grow overflow-hidden"
     >
       <div class="w-full flex gap-x-2 mt-1.5">
         <todo-input
@@ -223,7 +223,7 @@ watch(
         v-if="appStore.selectedTodo.subtasks.length"
         name="todo-list"
         tag="div"
-        class="custom_scroll relative flex flex-col gap-y-3 my-3 pr-2 overflow-y-auto"
+        class="custom_scroll relative flex flex-col gap-y-3 mt-3 pr-2 overflow-y-auto"
       >
         <todo-item
           v-for="{ id, name, isCompleted } in appStore.selectedTodo.subtasks"
