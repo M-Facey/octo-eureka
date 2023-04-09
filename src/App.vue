@@ -30,6 +30,14 @@ onMounted(() => {
   }
 
   // open feature modal when version change
+  const currentVersion = localStorage.getItem("__temp_version");
+  if (currentVersion) {
+    appStore.version = currentVersion;
+
+    localStorage.removeItem("__temp_version");
+    return;
+  }
+
   if (appStore.version) {
     const incomingMajorVersion = parseInt(version.split(".")[1]);
     const currentMajorVersion = parseInt(appStore.version.split(".")[1]);
@@ -37,6 +45,8 @@ onMounted(() => {
     if (incomingMajorVersion > currentMajorVersion) {
       modalStore.newFeature = true;
     }
+  } else {
+    appStore.version = version;
   }
 });
 

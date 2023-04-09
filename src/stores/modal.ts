@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import type { ModalOption } from "@/types";
+
+import { useAppStore } from "./app";
 import { useTagStore } from "./tag";
 
 export const useModalStore = defineStore({
@@ -83,9 +85,12 @@ export const useModalStore = defineStore({
     createSettingsModal() {
       this.resetModal();
 
+      const appStore = useAppStore();
       this.modalType = "settings";
       this.addModalOption("Clear Storage", "closeStorage", () => {
-        localStorage.clear();
+        localStorage.setItem("__temp_version", appStore.version);
+
+        localStorage.removeItem("_app_state");
         location.reload();
       });
     },

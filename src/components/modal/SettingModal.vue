@@ -3,7 +3,9 @@ import TodoButton from "@/components/input/TodoButton.vue";
 import IconClose from "@/components/icons/IconClose.vue";
 import IconDelete from "@/components/icons/IconDelete.vue";
 
+import { useAppStore } from "@/stores/app";
 import { useModalStore } from "@/stores/modal";
+const appStore = useAppStore();
 const modalStore = useModalStore();
 
 // So there are situations where the deployment of some releases
@@ -11,7 +13,9 @@ const modalStore = useModalStore();
 // in local storage. So that local storage needs to be reset
 // and the page reloaded.
 const nukeIt = () => {
-  localStorage.clear();
+  localStorage.setItem("__temp_version", appStore.version);
+
+  localStorage.removeItem("_app_state");
   location.reload();
 };
 </script>
