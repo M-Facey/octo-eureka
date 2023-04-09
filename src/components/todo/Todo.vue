@@ -5,6 +5,11 @@ import TodoFooter from "@/components/section/TodoFooter.vue";
 import TodoNotificationList from "@/components/notification/TodoNotificationList.vue";
 import useScreenSize from "@/composables/useScreenSize";
 
+export interface Props {
+  version: string;
+}
+defineProps<Props>();
+
 const { onDesktop, onMobile } = useScreenSize();
 </script>
 
@@ -17,6 +22,11 @@ const { onDesktop, onMobile } = useScreenSize();
       'bottom-0 h-[70vh] rounded-t-lg': onMobile,
     }"
   >
+    <p
+      class="absolute -top-1 right-2 -translate-y-full text-neutral-600 dark:text-neutral-300 font-black tracking-widest"
+    >
+      v{{ version }}
+    </p>
     <todo-header />
     <todo-list />
     <todo-footer />
