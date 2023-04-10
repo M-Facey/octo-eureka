@@ -92,14 +92,14 @@ onMounted(() => {
       <a
         target="_blank"
         href="https://icons8.com/icon/w0JUG294E8rU/todo-list"
-        class="text-neutral-600 hover:text-neutral-900 font-bold"
+        class="text-neutral-600 hover:text-neutral-700 font-bold"
         >Todo List</a
       >
       icon by
       <a
         target="_blank"
         href="https://icons8.com"
-        class="text-neutral-600 hover:text-neutral-900 font-bold"
+        class="text-neutral-600 hover:text-neutral-700 font-bold"
         >Icons8</a
       >
     </div>
