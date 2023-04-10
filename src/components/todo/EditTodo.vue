@@ -9,6 +9,8 @@ import TodoItem from "@/components/todo/TodoItem.vue";
 import IconAdd from "@/components/icons/IconAdd.vue";
 import IconClose from "@/components/icons/IconClose.vue";
 import IconAlert from "@/components/icons/IconAlert.vue";
+import IconEdit from "@/components/icons/IconEdit.vue";
+import IconSave from "@/components/icons/IconSave.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 
@@ -21,6 +23,14 @@ const notifyStore = useNotifyStore();
 const tagStore = useTagStore();
 
 const { onMobile } = useScreenSize();
+
+const isRenaming = ref(false);
+const toggleIsRenaming = () => {
+  if (isRenaming && appStore.selectedTodo?.name === "") {
+    appStore.selectedTodo.name = "Untitled";
+  }
+  isRenaming.value = !isRenaming.value;
+};
 
 const tagInput = ref("");
 
@@ -90,25 +100,61 @@ watch(
     v-if="appStore.selectedTodo"
     class="custom_scroll h-full flex flex-col pr-2 overflow-y-auto"
     :class="{
-      'w-1/3 mx-3': !onMobile,
+      'w-1/3 ml-2 ': !onMobile,
       'absolute w-full pl-1 bg-neutral-200 dark:bg-neutral-900': onMobile,
     }"
   >
-    <div class="flex items-center justify-between">
-      <h2 class="text-xl text-neutral-900 dark:text-white font-bold">
-        Todo: {{ appStore.selectedTodo.name }}
+    <div class="flex items-center">
+      <h2
+        class="flex items-center text-xl text-neutral-600 dark:text-white/50 font-bold"
+      >
+        Todo:
+        <span
+          class="block w-[85px] text-neutral-900 dark:text-white ml-1 overflow-hidden text-ellipsis whitespace-nowrap"
+        >
+          {{ appStore.selectedTodo.name }}
+        </span>
       </h2>
       <todo-button
         button-id="close-edit-view"
         button-label="Close"
-        button-size="sm"
+        button-size="xs"
         :show-label="false"
         data-cy="closeEditTodo"
+        class="ml-auto"
+        @trigger-event="toggleIsRenaming()"
+      >
+        <icon-edit v-show="!isRenaming" class="w-4 h-4 mx-0.5 my-1.5" />
+        <icon-save v-show="isRenaming" class="w-4 h-4 mx-0.5 my-1.5" />
+      </todo-button>
+      <todo-button
+        button-id="close-edit-view"
+        button-label="Close"
+        button-size="xs"
+        :show-label="false"
+        data-cy="closeEditTodo"
+        class="ml-1"
         @trigger-event="closeEditView()"
       >
-        <icon-close class="w-5" />
+        <icon-close class="w-5 h-5 my-1" />
       </todo-button>
     </div>
+
+    <todo-input
+      v-if="isRenaming"
+      type="text"
+      placeholder="Enter Tag"
+      v-model="appStore.selectedTodo.name"
+      class="flex-grow my-2"
+      :class="{ 'ml-1': !onMobile }"
+      input-data-cy="tagInput"
+      clear-data-cy="clearTags"
+      search-data-cy="addTags"
+      :has-clear-button="false"
+      @trigger-event-on-enter="addTags()"
+    />
+
+    <hr class="my-1 border-neutral-300 dark:border-neutral-700" />
 
     <div class="mb-1">
       <p
@@ -210,12 +256,12 @@ watch(
         <todo-button
           button-id="add-subtask"
           button-label="Add Subtask"
-          button-size="sm"
+          button-size="xs"
           :show-label="false"
           data-cy="addSubtask"
           @trigger-event="addSubtask()"
         >
-          <icon-add class="w-6" />
+          <icon-add class="w-5 h-5 mt-1.5" />
         </todo-button>
       </div>
 
