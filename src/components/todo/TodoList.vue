@@ -4,8 +4,10 @@ import EditTodo from "@/components/todo/EditTodo.vue";
 import EmptyTodo from "@/components/todo/EmptyTodo.vue";
 
 import { useAppStore } from "@/stores/app";
+import { useTagStore } from "@/stores/tag";
 
 const appStore = useAppStore();
+const tagStore = useTagStore();
 </script>
 
 <template>
@@ -25,7 +27,10 @@ const appStore = useAppStore();
         :todo-name="todo.name"
         :is-completed="todo.isCompleted"
         :can-edit="true"
-        :has-sub-task="todo.subtasks.length > 0"
+        :has-sub-task="todo.subtasks?.length > 0"
+        :description="todo.description"
+        :no-of-subtask="todo.subtasks.length"
+        :no-of-tags="tagStore.getTotalTodos(todo.id)"
         data-cy="todo"
         @toggle-completed="appStore.toggleIsCompleted(todo.id)"
         @edit-todo="appStore.setSelectedTodo(todo.id)"

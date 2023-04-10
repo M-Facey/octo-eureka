@@ -4,6 +4,9 @@ import TodoButton from "@/components/input/TodoButton.vue";
 import IconCheck from "@/components/icons/IconCheck.vue";
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconClose from "@/components/icons/IconClose.vue";
+import IconNote from "@/components/icons/IconNote.vue";
+import IconTag from "@/components/icons/IconTag.vue";
+import IconList from "@/components/icons/IconList.vue";
 
 import useScreenSize from "@/composables/useScreenSize";
 
@@ -14,6 +17,9 @@ export interface Prop {
   canEdit?: boolean;
   dataCy: string;
   hasSubTask?: boolean;
+  description?: string;
+  noOfSubtask?: number;
+  noOfTags?: number;
 }
 
 withDefaults(defineProps<Prop>(), {
@@ -51,15 +57,49 @@ const { onMobile } = useScreenSize();
       <icon-check class="w-4 opacity-0 peer-checked:opacity-100" />
     </label>
 
-    <p
-      class="font-bold tracking-wide ml-2 mr-auto"
-      :class="{
-        'completed text-neutral-500': isCompleted,
-        'text-neutral-900 dark:text-neutral-300': !isCompleted,
-      }"
+    <div
+      class="flex flex-col md:flex-row items-center justify-center gap-x-12 gap-y-2 ml-2"
     >
-      {{ todoName }}
-    </p>
+      <p
+        class="font-bold tracking-wide mr-auto"
+        :class="{
+          'completed text-neutral-500': isCompleted,
+          'text-neutral-900 dark:text-neutral-300': !isCompleted,
+        }"
+      >
+        {{ todoName }}
+      </p>
+
+      <div
+        v-if="description || noOfSubtask || noOfTags"
+        class="text-xs text-neutral-800 dark:text-neutral-300"
+      >
+        <div v-if="description" class="flex gap-1">
+          <icon-note class="w-3.5 h-3.5" />
+          <p
+            class="max-w-[150px] text-ellipsis whitespace-nowrap overflow-hidden"
+          >
+            {{ description }}
+          </p>
+        </div>
+        <div class="flex items-center gap-1 mt-1">
+          <icon-tag v-if="noOfTags" class="w-3.5 h-3.5" />
+          <p
+            v-if="noOfTags"
+            class="max-w-[100px] bg-black/10 dark:bg-white/10 px-1 py-0.5 text-ellipsis font-bold whitespace-nowrap overflow-hidden rounded"
+          >
+            {{ noOfTags }} tag(s)
+          </p>
+          <icon-list v-if="noOfSubtask" class="w-3.5 h-3.5 ml-2" />
+          <p
+            v-if="noOfSubtask"
+            class="max-w-[100px] bg-black/10 dark:bg-white/10 px-1 py-0.5 text-ellipsis font-bold whitespace-nowrap overflow-hidden rounded"
+          >
+            {{ noOfSubtask }} subtask(s)
+          </p>
+        </div>
+      </div>
+    </div>
 
     <div
       class="flex gap-x-3 ml-auto transition-opacity"
