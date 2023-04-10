@@ -199,7 +199,7 @@ onMounted(() => {
       </div>
 
       <todo-button
-        v-if="onMobileMd"
+        v-if="!onDesktop"
         button-id="settings"
         button-label="Settings"
         button-size="sm"
