@@ -33,6 +33,18 @@ export const useTagStore = defineStore({
     },
   },
   actions: {
+    getTotalTodos(todoId: string): number {
+      let todoTags: string[] = [];
+      const tags = Object.keys(this.tags);
+
+      for (const tag of tags) {
+        const todo = this.tags[tag].find((id) => todoId === id);
+        if (todo) {
+          todoTags.push(tag);
+        }
+      }
+      return todoTags.length;
+    },
     addNewTag(tag: string, todoId: string) {
       if (!tag) return;
       const tags = Object.keys(this.tags);
