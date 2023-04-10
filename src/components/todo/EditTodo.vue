@@ -169,7 +169,7 @@ watch(
       >
         <button
           v-for="tag in tagStore.getTagsByTodo"
-          class="w-[31%] bg-black/20 dark:bg-white/10 hover:bg-red-500 transition-colors px-2 py-0.5 text-black dark:text-white text-sm text-ellipsis whitespace-nowrap overflow-hidden rounded-md"
+          class="w-[31%] bg-black/20 dark:bg-white/10 hover:bg-red-500 hover:dark:bg-red-500 transition-colors px-2 py-0.5 text-black dark:text-white text-sm text-ellipsis whitespace-nowrap overflow-hidden rounded-md"
           @click="removeTag(tag)"
         >
           {{ tag }}
