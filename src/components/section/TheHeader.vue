@@ -6,7 +6,7 @@ const { onDesktop, onMobile, onMobileSm } = useScreenSize();
 <template>
   <header
     class="absolute h-[35vh] w-full flex flex-col items-center justify-end bg-neutral-300 dark:bg-neutral-800"
-    :class="{ 'pb-28': onDesktop, 'pb-[7vh]': onMobile }"
+    :class="{ 'pb-28': onDesktop, 'pb-[8vh]': onMobile }"
   >
     <div class="flex items-center gap-3">
       <div

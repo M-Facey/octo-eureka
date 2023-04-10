@@ -23,7 +23,7 @@ const { onDesktop, onMobile } = useScreenSize();
     }"
   >
     <p
-      class="absolute -top-1 right-2 -translate-y-full text-neutral-600 dark:text-neutral-300 font-black tracking-widest"
+      class="absolute -top-1 right-3 -translate-y-full text-neutral-600 dark:text-neutral-300 font-black tracking-widest"
     >
       v{{ version }}
     </p>
