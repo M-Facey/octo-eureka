@@ -143,13 +143,13 @@ watch(
     <todo-input
       v-if="isRenaming"
       type="text"
-      placeholder="Enter Tag"
+      placeholder="Enter Todo Name"
       v-model="appStore.selectedTodo.name"
-      class="flex-grow my-2"
+      class="my-2"
       :class="{ 'ml-1': !onMobile }"
-      input-data-cy="tagInput"
-      clear-data-cy="clearTags"
-      search-data-cy="addTags"
+      input-data-cy="todoNameInput"
+      clear-data-cy="clearTodoName"
+      search-data-cy="searchTodoName"
       :has-clear-button="false"
       @trigger-event-on-enter="addTags()"
     />
@@ -184,7 +184,7 @@ watch(
           :class="{ 'ml-1': !onMobile }"
           input-data-cy="tagInput"
           clear-data-cy="clearTags"
-          search-data-cy="addTags"
+          search-data-cy="searchTags"
           @trigger-event-on-enter="addTags()"
         />
         <todo-button

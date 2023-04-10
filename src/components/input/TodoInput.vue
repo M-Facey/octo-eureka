@@ -39,7 +39,7 @@ defineEmits<{
       :type="type"
       :placeholder="placeholder"
       :value="modelValue"
-      class="w-full h-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 py-2 outline-none rounded-md"
+      class="w-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-300 dark:border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-800 dark:text-neutral-300 py-2 outline-none rounded-md"
       :class="{
         'px-3': !hasClearButton && !hasSearchButton,
         'pl-3 pr-10': hasClearButton || hasSearchButton,
