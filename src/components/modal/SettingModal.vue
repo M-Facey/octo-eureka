@@ -5,6 +5,15 @@ import IconDelete from "@/components/icons/IconDelete.vue";
 
 import { useAppStore } from "@/stores/app";
 import { useModalStore } from "@/stores/modal";
+
+export interface Props {
+  bottom: boolean;
+}
+
+withDefaults(defineProps<Props>(), {
+  bottom: true,
+});
+
 const appStore = useAppStore();
 const modalStore = useModalStore();
 
@@ -22,7 +31,11 @@ const nukeIt = () => {
 
 <template>
   <div
-    class="absolute -top-3 -translate-y-full -right-2 w-max p-3 backdrop-blur-sm bg-neutral-100 dark:bg-neutral-800/70 border border-neutral-500/50 dark:border-neutral-700/70 rounded-md"
+    class="absolute -right-2 w-max p-3 backdrop-blur-sm bg-neutral-100 dark:bg-neutral-800/70 border border-neutral-500/50 dark:border-neutral-700/70 rounded-md"
+    :class="{
+      '-top-3 -translate-y-full': !bottom,
+      'top-full translate-y-3': bottom,
+    }"
     data-cy="settingsModal"
   >
     <div
