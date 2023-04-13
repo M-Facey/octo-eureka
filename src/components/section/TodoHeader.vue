@@ -8,6 +8,7 @@ import TodoButton from "@/components/input/TodoButton.vue";
 import FilterModal from "@/components/modal/FilterModal.vue";
 import SortModal from "@/components/modal/SortModal.vue";
 import TagModal from "@/components/modal/TagModal.vue";
+import SettingModal from "@/components/modal/SettingModal.vue";
 import MobileModal from "@/components/modal/MobileModal.vue";
 
 import IconAdd from "@/components/icons/IconAdd.vue";
@@ -50,6 +51,7 @@ const addNewTodo = () => {
 const filterModal = ref<HTMLElement | null>(null);
 const sortModal = ref<HTMLElement | null>(null);
 const tagModal = ref<HTMLElement | null>(null);
+const settingsModal = ref<HTMLElement | null>(null);
 
 const setTheme = () => {
   const preferredColorScheme = usePreferredColorScheme();
@@ -96,6 +98,13 @@ onMounted(() => {
 
     modalStore.resetModal();
   });
+
+  onClickOutside(settingsModal, (event) => {
+    const element = event.target as HTMLButtonElement;
+    if (element.id === "settings") return;
+
+    modalStore.resetModal();
+  });
 });
 </script>
 
@@ -120,7 +129,7 @@ onMounted(() => {
         button-id="add-todo"
         button-label="Add Todo"
         button-size="sm"
-        :show-label="!onMobileMd"
+        :show-label="onDesktop"
         :is-disabled="!newTodo"
         class="ml-auto"
         data-cy="addTodo"
@@ -198,19 +207,30 @@ onMounted(() => {
         </transition>
       </div>
 
-      <todo-button
-        v-if="!onDesktop"
-        button-id="settings"
-        button-label="Settings"
-        button-size="sm"
-        tooltip="Settings"
-        :show-label="betweenMobileSmAndMd"
-        data-cy="openMobileSettingsModal"
-        :class="{ 'w-1/3 items-center justify-center text-sm': onMobileMd }"
-        @trigger-event="setModal('settings')"
-      >
-        <icon-settings class="w-5 pointer-events-none" />
-      </todo-button>
+      <div v-if="!onDesktop" class="relative" :class="{ 'w-1/3': onMobileMd }">
+        <todo-button
+          v-if="!onDesktop"
+          button-id="settings"
+          button-label="Settings"
+          button-size="sm"
+          tooltip="Settings"
+          :show-label="betweenMobileSmAndMd"
+          data-cy="openMobileSettingsModal"
+          :class="{ 'items-center justify-center text-sm': onMobileMd }"
+          @trigger-event="setModal('settings')"
+        >
+          <icon-settings class="w-5 pointer-events-none" />
+        </todo-button>
+        <transition v-if="!onMobileMd" name="todo-fade">
+          <setting-modal
+            v-if="modalStore.modalType === 'settings'"
+            ref="settingsModal"
+            class="absolute z-10"
+            bottom
+            @click.stop
+          />
+        </transition>
+      </div>
     </div>
 
     <teleport to="#app" :disabled="onDesktop">
