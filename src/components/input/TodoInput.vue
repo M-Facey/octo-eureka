@@ -46,6 +46,7 @@ defineEmits<{
         'pl-3 pr-20': hasClearButton && hasSearchButton,
       }"
       :data-cy="inputDataCy"
+      maxlength="50"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
