@@ -98,30 +98,26 @@ watch(
 <template>
   <div
     v-if="appStore.selectedTodo"
-    class="custom_scroll h-full flex flex-col pr-2 overflow-y-auto"
+    class="custom_scroll h-full flex-shrink-0 flex flex-col pr-2 overflow-y-auto"
     :class="{
       'w-1/3 ml-2 ': !onMobile,
       'absolute w-full pl-1 bg-neutral-200 dark:bg-neutral-900': onMobile,
     }"
   >
-    <div class="flex items-center">
-      <h2
-        class="flex items-center text-xl text-neutral-600 dark:text-white/50 font-bold"
+    <div class="flex items-center text-xl font-bold">
+      <h2 class="text-neutral-600 dark:text-white/50">Todo:</h2>
+      <p
+        class="flex-grow text-neutral-900 dark:text-white ml-1 overflow-hidden text-ellipsis whitespace-nowrap"
       >
-        Todo:
-        <span
-          class="block w-[85px] text-neutral-900 dark:text-white ml-1 overflow-hidden text-ellipsis whitespace-nowrap"
-        >
-          {{ appStore.selectedTodo.name }}
-        </span>
-      </h2>
+        {{ appStore.selectedTodo.name }}
+      </p>
       <todo-button
         button-id="close-edit-view"
         button-label="Close"
         button-size="xs"
         :show-label="false"
         data-cy="closeEditTodo"
-        class="ml-auto"
+        class="mx-1"
         @trigger-event="toggleIsRenaming()"
       >
         <icon-edit v-show="!isRenaming" class="w-4 h-4 mx-0.5 my-1.5" />
@@ -133,7 +129,6 @@ watch(
         button-size="xs"
         :show-label="false"
         data-cy="closeEditTodo"
-        class="ml-1"
         @trigger-event="closeEditView()"
       >
         <icon-close class="w-5 h-5 my-1" />
@@ -145,7 +140,7 @@ watch(
       type="text"
       placeholder="Enter Todo Name"
       v-model="appStore.selectedTodo.name"
-      class="my-2"
+      class="mt-2"
       :class="{ 'ml-1': !onMobile }"
       input-data-cy="todoNameInput"
       clear-data-cy="clearTodoName"
@@ -154,22 +149,22 @@ watch(
       @trigger-event-on-enter="addTags()"
     />
 
-    <hr class="my-1 border-neutral-300 dark:border-neutral-700" />
+    <hr class="my-2 border-neutral-300 dark:border-neutral-700" />
 
-    <div class="mb-1">
+    <div class="my-2">
       <p
-        class="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 text-sm mb-1"
+        class="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 mb-2"
       >
-        <icon-alert class="w-4 text-red-500" />
+        <icon-alert class="w-5 h-5 text-red-500" />
         <span>Click tag to delete it </span>
       </p>
       <div
-        class="flex flex-wrap justify-center gap-1.5 mx-auto"
-        :class="{ 'mb-2': tagStore.getTagsByTodo.length !== 0 }"
+        class="flex flex-wrap justify-center gap-2 mx-auto"
+        :class="{ 'mb-3': tagStore.getTagsByTodo.length !== 0 }"
       >
         <button
           v-for="tag in tagStore.getTagsByTodo"
-          class="w-[31%] bg-black/20 dark:bg-white/10 hover:bg-red-500 hover:dark:bg-red-500 transition-colors px-2 py-0.5 text-black dark:text-white text-sm text-ellipsis whitespace-nowrap overflow-hidden rounded-md"
+          class="w-[calc(33%-0.35rem)] bg-black/20 dark:bg-white/10 hover:bg-red-500 hover:dark:bg-red-500 transition-colors px-2 py-0.5 box-border text-black dark:text-white text-sm text-ellipsis whitespace-nowrap overflow-hidden rounded-md"
           @click="removeTag(tag)"
         >
           {{ tag }}
@@ -195,22 +190,22 @@ watch(
           data-cy="addTags"
           @trigger-event="addTags()"
         >
-          <icon-add class="w-5 my-1" />
+          <icon-add class="w-5 mt-1.5" />
         </todo-button>
       </div>
     </div>
 
     <div v-if="onMobile" class="flex gap-2 my-2">
       <button
-        class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white uppercase tracking-widest px-4 py-2 rounded"
+        class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm tracking-widest px-4 py-2 rounded"
         :class="{ active: viewSection === 'description' }"
         data-cy="showDescription"
         @click="changeView('description')"
       >
-        {{ onMobile ? "Desc" : "Description" }}
+        Description
       </button>
       <button
-        class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white uppercase tracking-widest px-4 py-2 rounded"
+        class="relative w-1/2 bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-white text-sm tracking-widest px-4 py-2 rounded"
         :class="{ active: viewSection === 'subtasks' }"
         data-cy="showSubtasks"
         @click="changeView('subtasks')"
@@ -232,11 +227,12 @@ watch(
       <textarea
         v-model="appStore.selectedTodo.description"
         placeholder="Enter description here"
-        class="w-full h-32 mt-1.5 bg-neutral-300 dark:bg-neutral-800 border border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-900 dark:text-neutral-300 px-3 py-2 resize-none outline-none rounded"
+        class="custom_scroll w-full h-32 mt-1.5 bg-neutral-300 dark:bg-neutral-800 border border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 focus:ring-4 focus:ring-neutral-400/50 dark:focus:ring-neutral-600/50 text-neutral-900 dark:text-neutral-300 px-3 py-2 resize-none outline-none rounded"
         data-cy="todoDescription"
       ></textarea>
     </div>
 
+    <hr class="my-2 border-neutral-600" />
     <div
       v-if="!onMobile || viewSection === 'subtasks'"
       class="min-h-[180px] flex flex-col flex-grow overflow-hidden"
@@ -261,7 +257,7 @@ watch(
           data-cy="addSubtask"
           @trigger-event="addSubtask()"
         >
-          <icon-add class="w-5 h-5 mt-1.5" />
+          <icon-add class="w-5 h-5 mt-2" />
         </todo-button>
       </div>
 
