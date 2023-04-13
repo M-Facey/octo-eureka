@@ -10,10 +10,8 @@ This is a simple todo application created in Vue3 and TailwindCSS.
 
 ### Basic Features
 
-- [x] `ADD`, `DELETE`, `EDIT`, & `COMPLETE` todo(s)
 - [ ] Increased Accessability
   - [ ] High Contrast Mode
-  - [x] Styling for `prefers-reduced-motion`
 
 ### Extra Features
 
@@ -22,6 +20,10 @@ This is a simple todo application created in Vue3 and TailwindCSS.
   - Number of unit tests: 3
   - Number of e2e tests: 7
 - [ ] Clear todos after 24hrs
+
+### Chores
+- [ ] Fix the UI in the todo items
+  - The name of the todo need to stack on top of the each other
 
 ## Project Setup
 
