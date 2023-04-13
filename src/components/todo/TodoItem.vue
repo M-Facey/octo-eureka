@@ -43,7 +43,7 @@ const { onMobile } = useScreenSize();
   >
     <label
       for="taskCheck"
-      class="relative w-6 h-6 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 rounded"
+      class="relative w-6 h-6 flex-shrink-0 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-500 rounded"
       :class="{ 'pointer-events-none': hasSubTask }"
       data-cy="todoCheck"
       @click="$emit('toggleCompleted')"
@@ -58,13 +58,13 @@ const { onMobile } = useScreenSize();
     </label>
 
     <div
-      class="flex flex-col md:flex-row items-center justify-center gap-x-12 gap-y-2 ml-2"
+      class="flex flex-col justify-center gap-x-4 gap-y-3 mx-2 overflow-hidden"
     >
       <p
-        class="font-bold tracking-wide mr-auto"
+        class="w-full font-bold break-all tracking-wide overflow-hidden"
         :class="{
           'completed text-neutral-500': isCompleted,
-          'text-neutral-900 dark:text-neutral-300': !isCompleted,
+          'text-neutral-900 dark:text-neutral-100': !isCompleted,
         }"
       >
         {{ todoName }}
@@ -72,28 +72,34 @@ const { onMobile } = useScreenSize();
 
       <div
         v-if="description || noOfSubtask || noOfTags"
-        class="text-xs text-neutral-800 dark:text-neutral-300"
+        class="text-neutral-800 dark:text-neutral-400"
       >
-        <div v-if="description" class="flex gap-1">
-          <icon-note class="w-3.5 h-3.5" />
-          <p
-            class="max-w-[150px] text-ellipsis whitespace-nowrap overflow-hidden"
-          >
+        <div v-if="description" class="flex items-center gap-1 text-sm">
+          <icon-note class="w-4 h-4" />
+          <p class="w-full text-ellipsis whitespace-nowrap overflow-hidden">
             {{ description }}
           </p>
         </div>
-        <div class="flex items-center gap-1 mt-1">
+        <div
+          v-if="noOfSubtask || noOfTags"
+          class="flex items-center gap-1 text-xs"
+          :class="{ 'mt-1.5': description }"
+        >
           <icon-tag v-if="noOfTags" class="w-3.5 h-3.5" />
           <p
             v-if="noOfTags"
-            class="max-w-[100px] bg-black/10 dark:bg-white/10 px-1 py-0.5 text-ellipsis font-bold whitespace-nowrap overflow-hidden rounded"
+            class="bg-black/10 dark:bg-white/10 px-1 py-0.5 font-bold rounded"
           >
             {{ noOfTags }} tag(s)
           </p>
-          <icon-list v-if="noOfSubtask" class="w-3.5 h-3.5 ml-2" />
+          <icon-list
+            v-if="noOfSubtask"
+            class="w-3.5 h-3.5"
+            :class="{ 'ml-2': noOfTags }"
+          />
           <p
             v-if="noOfSubtask"
-            class="max-w-[100px] bg-black/10 dark:bg-white/10 px-1 py-0.5 text-ellipsis font-bold whitespace-nowrap overflow-hidden rounded"
+            class="bg-black/10 dark:bg-white/10 px-1 py-0.5 font-bold rounded"
           >
             {{ noOfSubtask }} subtask(s)
           </p>
