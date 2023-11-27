@@ -216,7 +216,7 @@ onMounted(() => {
           tooltip="Settings"
           :show-label="betweenMobileSmAndMd"
           data-cy="openMobileSettingsModal"
-          :class="{ 'items-center justify-center text-sm': onMobileMd }"
+          :class="{ 'w-full items-center justify-center text-sm': onMobileMd }"
           @trigger-event="setModal('settings')"
         >
           <icon-settings class="w-5 pointer-events-none" />
